@@ -1,0 +1,28 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "be-dev": "npx nodemon src/backend/index.ts",
+    "be-start": "node dist/backend/index.js",
+    "be-build": "tsc -p tsconfig.json"
+  },
+  "author": "Jarosław Bigaj, Vladyslaw Iszczuk, Mateusz Ciołek",
+  "license": "ISC",
+  "dependencies": {
+    "@eslint/create-config": "^0.4.2",
+    "@types/node": "^18.15.11",
+    "nodemon": "^2.0.22",
+    "npx": "^10.2.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.57.0",
+    "@typescript-eslint/parser": "^5.57.0",
+    "eslint": "^8.37.0",
+    "eslint-plugin-react": "^7.32.2"
+  }
+}
