@@ -14,6 +14,7 @@
   "dependencies": {
     "@eslint/create-config": "^0.4.2",
     "@types/node": "^18.15.11",
+    "express": "^4.18.2",
     "nodemon": "^2.0.22",
     "npx": "^10.2.2",
     "ts-node": "^10.9.1",
