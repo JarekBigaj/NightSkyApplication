@@ -1,8 +1,4 @@
 import { startServer } from './server'
 import { config } from './config'
+startServer(config.server)
 
-async function main() {
-    await startServer(config.server);
-};
-
-main()
