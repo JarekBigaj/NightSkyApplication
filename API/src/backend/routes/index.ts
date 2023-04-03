@@ -1,5 +1,6 @@
 import express from 'express'
 import { getStatus } from './status/get.status'
+import { getStars } from './stars/get.stars'
 const router = express.Router()
 // middleware
 router.use((req, res, next) => {
@@ -11,5 +12,10 @@ router.get('/', (req, res) => {
 })
 // api route
 router.get('/api/status', getStatus)
+
+// api stars
+router.get('/api/stars', getStars)
 export default router
+
+
 
