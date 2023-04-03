@@ -12,3 +12,4 @@ router.get('/', (req, res) => {
 // api route
 router.get('/api/status', getStatus)
 export default router
+
