@@ -13,9 +13,7 @@ router.get('/', (req, res) => {
 // api route
 router.get('/api/status', getStatus)
 
-// api stars
-router.get('/api/stars', getStars)
+// api route
+router.get('/api/stars/:name', getStars)
+
 export default router
-
-
-
