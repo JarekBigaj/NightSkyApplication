@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import AddStarForm from "./AddStarForm";
 
 function App() {
 
@@ -7,6 +8,7 @@ function App() {
     <div>
       <AppTitle/>
       <AppFunctionBar/>
+      <AddStarForm/>
     </div>
   );
 }
