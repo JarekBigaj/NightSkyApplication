@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState,useEffect } from "react";
+import { useState } from "react";
 
 const LUNAR_PHASES = [
     { id: 'full', name: 'Full Moon' },
@@ -8,10 +8,18 @@ const LUNAR_PHASES = [
     { id: 'third-quarter', name: 'Third Quarter' }
 ];
 
-function AddStarForm(){
+const PRECIPITATION_TYPES = [
+    {id:`rain`, name: `Rain`},
+    {id:`snow`, name:`Snow`},
+    {id:`sleet`, name:`Sleet`}
+];
+
+function NightSkyWeather(){
     const [nightSkyWeather,  setNightSkyWeather] = useState(() =>{
         return {
                 cloudinessLevel: '5',
+                isPrecipitation: false,
+                typeOfPrecipitaion: ``,
                 lunarPhase: '',
                 fogDensityLevel: '5'
             }
@@ -38,15 +46,48 @@ function AddStarForm(){
         });
     };
 
-    console.log(nightSkyWeather);
+    const handlePrecipitationChange = (event) => {
+        setNightSkyWeather({
+            ...nightSkyWeather,
+            isPrecipitation: event.target.checked
+        });
+    };
+    
+    const handlePrecipitationTypeChange = (event) => {
+        setNightSkyWeather({
+            ...nightSkyWeather,
+            typeOfPrecipitaion: event.target.value
+        });
+    };
 
+    console.log({nightSkyWeather});
+    const {cloudinessLevel,isPrecipitation,typeOfPrecipitaion,lunarPhase,fogDensityLevel} = nightSkyWeather;
     return (
         <div>
             <SliderWrapper name="cloudinessLevel">
                 <Label value="Cloudiness Level : "/>
-                <Slider type="range" min="1" max="10" value={nightSkyWeather.cloudinessLevel} onChange={handleCloudinessChange} />
-                <Label value={nightSkyWeather.cloudinessLevel}/>
+                <Slider type="range" min="1" max="10" value={cloudinessLevel} onChange={handleCloudinessChange} />
+                <Label value={cloudinessLevel}/>
             </SliderWrapper>
+            <CheckBoxWrapper>
+                <Label value="Precipitation : "/>
+                <Input type="checkbox" checked={isPrecipitation} onChange={handlePrecipitationChange}/>
+            </CheckBoxWrapper>
+            <CheckBoxWrapper>
+                {isPrecipitation &&(
+                    PRECIPITATION_TYPES.map((type) => (
+                        <label key={type.id}>
+                            <Input
+                                type="radio"
+                                name="type-precipitation"
+                                value={type.id}
+                                checked={typeOfPrecipitaion === type.id}
+                                onChange={handlePrecipitationTypeChange}/>
+                            {type.name}
+                        </label>
+                    ))
+                )}
+            </CheckBoxWrapper>
             <CheckBoxWrapper>
                 {LUNAR_PHASES.map((phase) => (
                     <label key={phase.id}>
@@ -54,7 +95,7 @@ function AddStarForm(){
                         type="radio"
                         name="lunar-phase"
                         value={phase.id}
-                        checked={nightSkyWeather.lunarPhase === phase.id}
+                        checked={lunarPhase === phase.id}
                         onChange={handlePhaseChange}
                     />
                     {phase.name}
@@ -63,8 +104,8 @@ function AddStarForm(){
             </CheckBoxWrapper>
             <SliderWrapper name="fogDensityLevel">
                 <Label value="Fog Density Level : "/>
-                <Slider type="range" min="1" max="10" value={nightSkyWeather.fogDensityLevel} onChange={handleFogChange} />
-                <Label value={nightSkyWeather.fogDensityLevel}/>
+                <Slider type="range" min="1" max="10" value={fogDensityLevel} onChange={handleFogChange} />
+                <Label value={fogDensityLevel}/>
             </SliderWrapper>
             
         </div>
@@ -101,22 +142,4 @@ const Slider = styled(({className,type,min,max,value,onChange})=>{
 
 `;
 
-const ListWraper = styled(({className,children}) => {
-    return <div className={className}>{children}</div>
-})`
-
-`;
-
-const List = styled(({className,children,name})=>{
-    return <ul name={name} className={className}>{children}</ul>
-})`
-
-`;
-
-const ListItem = styled(({className,value})=>{
-    return <li className={className}>{value}</li>
-})`
-
-`;
-
-export default AddStarForm;
+export default NightSkyWeather;
