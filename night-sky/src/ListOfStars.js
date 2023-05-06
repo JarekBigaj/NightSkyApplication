@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState,useMemo } from "react";
+import Pagination from "./Pagination";
+
 
 const dummyObject = {
     key: "",
@@ -9,10 +11,13 @@ const dummyObject = {
 }
 const dummyObjectsList = [];
 
+const PageSize = 10;
+
 for(let i=0; i<100;i++){
     const obj = {
         ...dummyObject,
-        key:i
+        key:i,
+        name: dummyObject.name + i + " "
     }
     dummyObjectsList.push(obj);
 }
@@ -21,9 +26,22 @@ console.log({dummyObjectsList})
 function ListOfStars(){
     const [currentPage, setCurrentPage] = useState(1);
     
+    const currentTableData = useMemo(() => {
+        const firstPageIndex = (currentPage - 1) * PageSize;
+        const lastPageIndex = firstPageIndex + PageSize;
+        return dummyObjectsList.slice(firstPageIndex, lastPageIndex);
+      }, [currentPage]);
+    
     return (
         <div>
-            <Table props={dummyObjectsList}/>
+            <Table props={currentTableData}/>
+            <Pagination
+                className="pagination-bar"
+                currentPage={currentPage}
+                totalCount={dummyObjectsList.length}
+                pageSize={PageSize}
+                onPageChange={page => setCurrentPage(page)}
+            />
         </div>
     )
 }
