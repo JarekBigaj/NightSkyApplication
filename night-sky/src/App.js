@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import NightSkyWeather from "./NightSkyWeather";
+import ListOfStars from "./ListOfStars";
 
 function App() {
 
@@ -9,6 +10,7 @@ function App() {
       <AppTitle/>
       <AppFunctionBar/>
       <NightSkyWeather/>
+      <ListOfStars/>
     </div>
   );
 }
