@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const LUNAR_PHASES = [
     { id: 'full', name: 'Full Moon' },
@@ -17,27 +18,19 @@ const PRECIPITATION_TYPES = [
 function NightSkyWeather(){
     const [nightSkyWeather,  setNightSkyWeather] = useState(() =>{
         return {
-                cloudinessLevel: '5',
+                cloudinessLevel: 5,
                 isPrecipitation: false,
                 typeOfPrecipitaion: ``,
                 lunarPhase: '',
-                fogDensityLevel: '5'
+                fogDensityLevel: 5
             }
     });
 
     const handleCloudinessChange = (event) => {
-        setNightSkyWeather({
-            ...nightSkyWeather,
-            cloudinessLevel: event.target.value
-          });
-        if(cloudinessLevel<=0){
-            setNightSkyWeather({
-                ...nightSkyWeather,
-                cloudinessLevel: event.target.value,
-                isPrecipitation:false,
-                typeOfPrecipitaion:``
-            });
-        }
+        setNightSkyWeather(prevState => ({
+            ...prevState,
+            cloudinessLevel: Number(event.target.value)
+          }));
     }
 
     const handlePhaseChange = (event) => {
@@ -50,15 +43,15 @@ function NightSkyWeather(){
     const handleFogChange = (event) => {
         setNightSkyWeather({
             ...nightSkyWeather,
-            fogDensityLevel: event.target.value
+            fogDensityLevel: Number(event.target.value)
         });
     };
 
     const handlePrecipitationChange = (event) => {
-        setNightSkyWeather({
-            ...nightSkyWeather,
+        setNightSkyWeather(prevState => ({
+            ...prevState,
             isPrecipitation: event.target.checked
-        });
+        }))
     };
     
     const handlePrecipitationTypeChange = (event) => {
@@ -67,6 +60,17 @@ function NightSkyWeather(){
             typeOfPrecipitaion: event.target.value
         });
     };
+
+    useEffect(()=>{
+        if(nightSkyWeather.cloudinessLevel===0){
+            setNightSkyWeather(prevState => ({
+                ...prevState,
+                isPrecipitation: false,
+                typeOfPrecipitaion:``
+            }));
+        }
+        
+    },[nightSkyWeather.cloudinessLevel])
 
     console.log(nightSkyWeather)
     const {cloudinessLevel,isPrecipitation,typeOfPrecipitaion,lunarPhase,fogDensityLevel} = nightSkyWeather;
@@ -81,6 +85,7 @@ function NightSkyWeather(){
                 <Label value="Precipitation : "/>
                 <Input type="checkbox" 
                     checked={isPrecipitation} 
+                    value={isPrecipitation}
                     onChange={handlePrecipitationChange} 
                     disabled={cloudinessLevel === 0}/>
             </CheckBoxWrapper>
@@ -154,8 +159,8 @@ const SliderWrapper = styled(({className,name,children})=>{
 
 `;
 
-const Input = styled(({className,type,value,onChange,name,disabled})=>{
-    return <input className={className} name={name} type={type} value={value} onChange={onChange} disabled={disabled}/>
+const Input = styled(({className,checked,type,value,onChange,name,disabled})=>{
+    return <input className={className} checked={checked} name={name} type={type} value={value} onChange={onChange} disabled={disabled}/>
 })`
 
 `;
