@@ -35,31 +35,25 @@ const Pagination = props => {
   return (
     <ul>
        {/* Left navigation arrow */}
-      <li
-        onClick={onPrevious}
-      >
+      <li key="arrowLeft" onClick={onPrevious}>
         <div className="arrow left" />
       </li>
       {paginationRange.map(pageNumber => {
          
         // If the pageItem is a DOT, render the DOTS unicode character
         if (pageNumber === DOTS) {
-          return <li key={pageNumber}>&#8230;</li>;
+            const random = Math.random()*10;
+          return <li key={random}>&#8230;</li>;
         }
 		
         // Render our Page Pills
         return (
-          <li key={pageNumber}
-            onClick={() => onPageChange(pageNumber)}
-          >
+          <li key={pageNumber+"pageNumber"}onClick={() => onPageChange(pageNumber)}>
             {pageNumber}
           </li>
         );
       })}
-      {/*  Right Navigation arrow */}
-      <li key="rightArrow"
-        onClick={onNext}
-      >
+      <li key="rightArrow" onClick={onNext}>
         <div className="arrow right" />
       </li>
     </ul>

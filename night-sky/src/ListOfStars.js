@@ -16,7 +16,7 @@ const PageSize = 10;
 for(let i=0; i<100;i++){
     const obj = {
         ...dummyObject,
-        key:i,
+        key: dummyObject.name + i,
         name: dummyObject.name + i + " "
     }
     dummyObjectsList.push(obj);
@@ -24,6 +24,7 @@ for(let i=0; i<100;i++){
 console.log({dummyObjectsList})
 
 function ListOfStars(){
+    const [starsData, setStarsData] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     
     const currentTableData = useMemo(() => {
