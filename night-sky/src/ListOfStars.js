@@ -1,9 +1,10 @@
 import { useState,useMemo, useEffect } from "react";
 import Pagination from "./Pagination";
+import styled from "styled-components";
 
 const API_GET_STARS_LIST = `http://127.0.0.1:3600/starsList.json`;
 
-const PageSize = 10;
+const PageSize = 3;
 
 
 function ListOfStars(){
@@ -32,7 +33,7 @@ function ListOfStars(){
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
         return starsData.slice(firstPageIndex, lastPageIndex);
-      }, [currentPage]);
+      }, [currentPage,starsData]);
     
     return (
         <div>
@@ -48,9 +49,8 @@ function ListOfStars(){
     )
 }
 
-const Table = ({props}) => {
+const Table = styled(({className,props}) => {
     const elements = props;
-
     return (
         <table>
             <thead>
@@ -64,17 +64,19 @@ const Table = ({props}) => {
             <tbody>
                 {
                     elements.map((element) => (
-                        <tr key={element.key}>
+                        <tr key={element.id}>
                             <td>{element.name}</td>
                             <td>{element.description}</td>
                             <td>{element.urlImage}</td>
-                            <td>{element.constellation}</td>
+                            <td>{element.constellationId}</td>
                         </tr>
                     ))
                 }
             </tbody>
         </table>
         )
-}
+})`
+
+`;
 
 export default ListOfStars;

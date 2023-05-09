@@ -1,14 +1,21 @@
 import React from 'react';
 import { usePagination, DOTS } from './usePagination';
+import styled,{ThemeProvider} from 'styled-components';
 
-const Pagination = props => {
+const theme = {
+  colors: {
+    primary: "blue",
+    lightGrey: "#f5f5f5"
+  }
+};
+
+const Pagination = (props,{className}) => {
   const {
     onPageChange,
     totalCount,
     siblingCount = 1,
     currentPage,
-    pageSize,
-    className
+    pageSize
   } = props;
 
   const paginationRange = usePagination({
@@ -18,46 +25,90 @@ const Pagination = props => {
     pageSize
   });
 
-  // If there are less than 2 times in pagination range we shall not render the component
-  if (currentPage === 0 || paginationRange.length < 2) {
-    return null;
-  }
+  if (currentPage === 0 || paginationRange.length < 2) return null;
 
   const onNext = () => {
-    onPageChange(currentPage + 1);
+    if(currentPage < lastPage) onPageChange(currentPage + 1);
   };
 
   const onPrevious = () => {
-    onPageChange(currentPage - 1);
+    if(currentPage > 1) onPageChange(currentPage - 1);
   };
 
-  let lastPage = paginationRange[paginationRange.length - 1];
+  const lastPage = paginationRange[paginationRange.length - 1];
   return (
-    <ul>
-       {/* Left navigation arrow */}
-      <li key="arrowLeft" onClick={onPrevious}>
-        <div className="arrow left" />
-      </li>
-      {paginationRange.map(pageNumber => {
-         
-        // If the pageItem is a DOT, render the DOTS unicode character
-        if (pageNumber === DOTS) {
+    <ThemeProvider theme={theme}>
+      <PaginationWrapper className={className}>
+        <PaginationItem 
+          key="arrowLeft" 
+          onClick={onPrevious} 
+          className={currentPage === 1 ? "disabled" : ""}
+        >
+          <PaginationArrow direction="left" />
+        </PaginationItem>
+        {paginationRange.map(pageNumber => {
+          if (pageNumber === DOTS) {
             const random = Math.random()*10;
-          return <li key={random}>&#8230;</li>;
-        }
-		
-        // Render our Page Pills
-        return (
-          <li key={pageNumber+"pageNumber"}onClick={() => onPageChange(pageNumber)}>
-            {pageNumber}
-          </li>
-        );
-      })}
-      <li key="rightArrow" onClick={onNext}>
-        <div className="arrow right" />
-      </li>
-    </ul>
+            return <PaginationItem key={random}>&#8230;</PaginationItem>;
+          }
+          return (
+                <PaginationItem 
+                  active={pageNumber === currentPage}
+                  key={pageNumber+"pageNumber"}
+                  onClick={() => onPageChange(pageNumber)
+                }>
+                {pageNumber}
+                </PaginationItem>
+              );
+        })}
+
+        <PaginationItem  
+          key="rightArrow" 
+          onClick={onNext} 
+          className={currentPage === lastPage ? "disabled" : ""}
+        >
+          <PaginationArrow direction="right"/>
+        </PaginationItem>
+      </PaginationWrapper>
+    </ThemeProvider>
   );
 };
 
+
+const PaginationWrapper = styled.ul`
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+`;
+
+const PaginationItem = styled.li`
+  padding: 0.5rem;
+  margin: 0 0.25rem;
+  background-color: ${props =>
+    props.active ? props.theme.colors.primary : "white"};
+  color: ${props => (props.active ? "white" : "black")};
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.lightGrey};
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`;
+
+const PaginationArrow = styled.div`
+  border: solid ${props => props.theme.colors.primary};
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: ${props =>
+    props.direction === "left" ? "rotate(135deg)" : "rotate(-45deg)"};
+`;
 export default Pagination;
