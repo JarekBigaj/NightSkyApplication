@@ -1,11 +1,21 @@
 import { useState,useMemo, useEffect } from "react";
 import Pagination from "./Pagination";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
 const API_GET_STARS_LIST = `http://127.0.0.1:3600/starsList.json`;
 
 const PageSize = 3;
 
+const theme = {
+    colors: {
+      grey: '#8a8a8a',
+      greyLighter: '#c5c5c5',
+      primary: '#007bff',
+      white: '#ffffff',
+      dark: '#343a40',
+    }
+};
+  
 
 function ListOfStars(){
     const [starsData, setStarsData] = useState([]);
@@ -37,7 +47,9 @@ function ListOfStars(){
     
     return (
         <div>
-            <Table props={currentTableData}/>
+            <ThemeProvider theme={theme}>
+                <Table props={currentTableData}/>
+            </ThemeProvider>
             <Pagination
                 className="pagination-bar"
                 currentPage={currentPage}
@@ -52,31 +64,87 @@ function ListOfStars(){
 const Table = styled(({className,props}) => {
     const elements = props;
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Image</th>
-                    <th>Name of Constellation</th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    elements.map((element) => (
-                        <tr key={element.id}>
-                            <td>{element.name}</td>
-                            <td>{element.description}</td>
-                            <td>{element.urlImage}</td>
-                            <td>{element.constellationId}</td>
-                        </tr>
-                    ))
-                }
-            </tbody>
-        </table>
+        <TableWrapper>
+            <table className={className}>
+                <thead>
+                    <TableRow>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Image</th>
+                        <th>Name of Constellation</th>
+                    </TableRow>
+                </thead>
+                <tbody>
+                    {
+                        elements.map((element) => (
+                            <TableRow key={element.id}>
+                                <TableCell>{element.name}</TableCell>
+                                <TableCell>{element.description}</TableCell>
+                                <TableCell>{element.urlImage}</TableCell>
+                                <TableCell>{element.constellationId}</TableCell>
+                            </TableRow>
+                        ))
+                    }
+                </tbody>
+            </table>
+        </TableWrapper>
         )
 })`
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  background-color: ${props => props.theme.colors.white};
+  color: ${props => props.theme.colors.dark};
+  border-radius: 0.25rem;
+  overflow: hidden;
+  
+  th,
+  td {
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-top: 1px solid ${props => props.theme.colors.greyLighter};
+  }
 
+  thead {
+    background-color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.white};
+  }
+
+  th {
+    font-weight: 700;
+    text-align: left;
+    vertical-align: bottom;
+    border-bottom: 2px solid ${props => props.theme.colors.greyLighter};
+  }
+
+  tbody tr:nth-of-type(odd) {
+    background-color: ${props => props.theme.colors.greyLighter};
+  }
+
+  tbody td {
+    vertical-align: middle;
+    border-bottom: 1px solid ${props => props.theme.colors.greyLighter};
+  }
+`;
+
+
+const TableWrapper = styled.div`
+  overflow-x: auto;
+`;
+
+
+const TableRow = styled.tr`
+  &:hover {
+    background-color: ${props => props.theme.colors.grey};
+  }
+`;
+
+const TableCell = styled.td`
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 `;
 
 export default ListOfStars;
