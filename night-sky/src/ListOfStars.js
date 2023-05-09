@@ -1,36 +1,37 @@
-import { useState,useMemo } from "react";
+import { useState,useMemo, useEffect } from "react";
 import Pagination from "./Pagination";
 
-
-const dummyObject = {
-    key: "",
-    name: "Gwiazda",
-    description: "Gwiazda to taka gwiazda że hej",
-    urlImage: "Tu bedzie link do zdjecia",
-    constellation:"Nazwa konstelacji"
-}
-const dummyObjectsList = [];
+const API_GET_STARS_LIST = `http://127.0.0.1:3600/starsList.json`;
 
 const PageSize = 10;
 
-for(let i=0; i<100;i++){
-    const obj = {
-        ...dummyObject,
-        key: dummyObject.name + i,
-        name: dummyObject.name + i + " "
-    }
-    dummyObjectsList.push(obj);
-}
-console.log({dummyObjectsList})
 
 function ListOfStars(){
-    const [starsData, setStarsData] = useState("");
+    const [starsData, setStarsData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    
+
+    const getStarsList = async () =>{
+        const response = await fetch(API_GET_STARS_LIST);
+        if(!response.ok) throw new Error(`This is an HTTP error: The status is ${response.status}`);
+        const json = await response.json();
+        return json;
+    }
+
+    useEffect(() => {
+        (async () =>{
+            try{
+                const response = await getStarsList();
+                setStarsData(response);
+            } catch (error) {
+                console.log(error);
+            }
+        })()
+    },[])
+
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
-        return dummyObjectsList.slice(firstPageIndex, lastPageIndex);
+        return starsData.slice(firstPageIndex, lastPageIndex);
       }, [currentPage]);
     
     return (
@@ -39,7 +40,7 @@ function ListOfStars(){
             <Pagination
                 className="pagination-bar"
                 currentPage={currentPage}
-                totalCount={dummyObjectsList.length}
+                totalCount={starsData.length}
                 pageSize={PageSize}
                 onPageChange={page => setCurrentPage(page)}
             />
