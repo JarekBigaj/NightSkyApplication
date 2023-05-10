@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./nightsky.db"
+}
+
+model Star {
+  id              String   @id
+  name            String
+  description     String
+  urlImage        String
+  constellationId String
+  
+  constellation   Constellation @relation(fields: [constellationId], references: [id])
+}
+
+model Constellation {
+  id    String  @id
+  name  String
+  stars Star[]
+}
