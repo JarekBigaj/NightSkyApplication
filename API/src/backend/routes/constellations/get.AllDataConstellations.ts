@@ -4,9 +4,9 @@ import { prisma } from '../../database'
 import { checkPrismaError } from '../../utils'
 
 export const getAllDataConstellations: RequestHandler = async (req, res) => {
-
+  
   try{
-    const AllConstellations = await prisma.constellation.findMany()
+    const AllConstellations = await prisma.constellation.findMany();
 
     res.status(StatusCodes.OK)
     res.send({ ...AllConstellations })

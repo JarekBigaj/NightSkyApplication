@@ -15,8 +15,7 @@ export const AddConstellation: RequestHandler = async (req, res) => {
             name
         },
     })
-    res.status(StatusCodes.CREATED)
-    res.send({ ...createdConstellation })
+    res.status(StatusCodes.OK)
 } catch (err) {
 console.error(err)
 const response = checkPrismaError(err, {
