@@ -1,11 +1,14 @@
 import express from 'express'
 import { getStatus } from './status/get.status'
-//import { getAllDataStars } from './stars/get.alldatastars'
-import { getDataSelectedStar } from './stars/get.dataSelectedStar'
 import { AddStar } from './stars/post.AddStar'
-import { AddConstellation } from './stars/post.AddConstellation'
+import { AddConstellation } from './constellations/post.AddConstellation'
 import { getAllDataStars } from './stars/get.AllDataStars'
-import { getAllDataConstellations } from './stars/get.AllDataConstellations'
+import { getAllDataConstellations } from './constellations/get.AllDataConstellations'
+import { getDataSelectedStar } from './stars/get.dataSelectedStar'
+import { getDataSelectedConstellation } from './constellations/get.dataSelectedConstellation'
+import { EditSelectedStar} from './stars/put.EditSelectedStar'
+import { DeleteSelectedStar } from './stars/delete.deleteSelectedStar'
+import { DeleteSelectedConstellation } from './constellations/delete.DataSelectedConstellation'
 
 const router = express.Router()
 // middleware
@@ -19,19 +22,21 @@ router.get('/', (req, res) => {
 // api route
 router.get('/api/status', getStatus)
 
-// api route
-router.get('/api/stars/:name', getDataSelectedStar)
-
-//router.get('/api/stars/getalldatastars', getAllDataStars)
-
 router.post('/api/stars/addStar', AddStar)
 
 router.post('/api/stars/addConstellation', AddConstellation)
 
 router.get('/api/stars/getDataSelectedStar/', getDataSelectedStar)
 
+router.get('/api/constellations/getDataSelectedConstellation/', getDataSelectedConstellation)
+
 router.get('/api/stars/getAllDataStars', getAllDataStars)
 
-router.get('/api/stars/getAllDataConstellations', getAllDataConstellations)
+router.get('/api/constellations/getAllDataConstellations', getAllDataConstellations)
 
+router.put('/api/stars/EditSelectedStar', EditSelectedStar )
+
+router.delete('/api/stars/DeleteSelectedStar', DeleteSelectedStar )
+
+router.delete('/api/stars/DeleteSelectedConstellation', DeleteSelectedConstellation )
 export default router
