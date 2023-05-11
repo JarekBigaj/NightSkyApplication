@@ -1,4 +1,3 @@
-
 import { RequestHandler } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import { v4 } from 'uuid'
@@ -18,9 +17,7 @@ export const AddStar: RequestHandler = async (req, res) => {
             constellationId,
         },
     })
-    res.send({ ...createdStar })
-    res.status(StatusCodes.CREATED)
-    res.send({ ...createdStar })
+    res.status(StatusCodes.OK)
 } catch (err) {
 console.error(err)
 const response = checkPrismaError(err, {
