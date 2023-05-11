@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import NightSkyWeather from "./NightSkyWeather";
 import ListOfStars from "./ListOfStars";
+import Navbar from "./Navbar";
 
 function App() {
 
   return (
     <div>
-      <AppTitle/>
+      <Navbar/>
       <AppFunctionBar/>
       <NightSkyWeather/>
       <ListOfStars/>
