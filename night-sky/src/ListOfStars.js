@@ -69,9 +69,7 @@ const Table = styled(({className,props}) => {
                 <thead>
                     <TableRow>
                         <th>Name</th>
-                        <th>Description</th>
-                        <th>Image</th>
-                        <th>Name of Constellation</th>
+                        <th>Constellation</th>
                     </TableRow>
                 </thead>
                 <tbody>
@@ -79,8 +77,6 @@ const Table = styled(({className,props}) => {
                         elements.map((element) => (
                             <TableRow key={element.id}>
                                 <TableCell>{element.name}</TableCell>
-                                <TableCell>{element.description}</TableCell>
-                                <TableCell>{element.urlImage}</TableCell>
                                 <TableCell>{element.constellationId}</TableCell>
                             </TableRow>
                         ))
@@ -91,7 +87,7 @@ const Table = styled(({className,props}) => {
         )
 })`
   border-collapse: collapse;
-  width: 100%;
+  width: 50%;
   max-width: 100%;
   margin-bottom: 1rem;
   background-color: ${props => props.theme.colors.white};
