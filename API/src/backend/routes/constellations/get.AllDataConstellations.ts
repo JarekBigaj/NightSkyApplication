@@ -9,7 +9,7 @@ export const getAllDataConstellations: RequestHandler = async (req, res) => {
     const AllConstellations = await prisma.constellation.findMany();
 
     res.status(StatusCodes.OK)
-    res.send({ ...AllConstellations })
+    res.send( AllConstellations )
   } catch (err) {
     console.error(err)
     const response = checkPrismaError(err, {
