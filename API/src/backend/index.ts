@@ -1,9 +1,16 @@
-const express = require("express");
+import { startServer } from './server'
+import { config } from './config'
+import { prisma } from './database'
+async function main() {
+await startServer(config.server)
+}
+main()
+.then(async () => {
+await prisma.$disconnect()
+})
+.catch(async (e) => {
+console.error(e)
+await prisma.$disconnect()
+process.exit(1)
+})
 
-const app = express();
-
-app.get("/", (req, res) => {
-    res.send("Hello World!");
-});
-
-app.listen(3000,() => console.log("Server listening at port 3000"));
