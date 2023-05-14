@@ -1,6 +1,6 @@
 import { useState,useMemo, useEffect } from "react";
 import Pagination from "../../helperFunctions/Pagination";
-import styled, { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import Table from "../../helperComponents/TableOfElements";
 
 const API_GET_STARS_LIST = `http://127.0.0.1:3600/starsList.json`;
