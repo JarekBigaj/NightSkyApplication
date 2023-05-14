@@ -1,36 +1,19 @@
-import { useEffect, useState } from "react";
-import styled from "styled-components";
+import NightSkyWeather from "./NightSkyWeather";
+import ListOfStars from "./pages/listOfStars";
+import Navbar from "./Navbar";
+import Home from "./pages/Home";
 
 function App() {
 
   return (
     <div>
-      <AppTitle/>
-      <AppFunctionBar/>
+      <Navbar/>
+      <Home/>
+      <NightSkyWeather/>
+      <ListOfStars/>
     </div>
   );
 }
 
-const AppTitle = styled(({className}) =>{
-  return <h1 className={className}>NightSky</h1>
-})`
-  color:blue;
-`;
-
-const AppFunctionBar = styled(({className}) => {
-  return(
-    <div>
-      <AppFunctionButton buttonName="Add Star" onClick={() => console.log({className})}/>
-    </div>
-  )
-})`
-
-`;
-
-const AppFunctionButton = styled(({className, buttonName, onClick}) =>{
-  return <button className={className} onClick={onClick}>{buttonName}</button>
-})`
-
-`;
 
 export default App;
