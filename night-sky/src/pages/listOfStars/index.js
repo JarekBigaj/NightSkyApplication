@@ -3,7 +3,7 @@ import Pagination from "../../helperFunctions/Pagination";
 import { ThemeProvider } from "styled-components";
 import Table from "../../helperComponents/TableOfElements";
 
-const API_GET_STARS_LIST = `http://127.0.0.1:3600/starsList.json`;
+const API_GET_STARS_LIST = `http://localhost:3600/api/stars/getAllDataStars`;
 
 const PageSize = 3;
 
@@ -34,6 +34,7 @@ function ListOfStars(){
             try{
                 const response = await getStarsList();
                 setStarsData(response);
+                console.log(response);
             } catch (error) {
                 console.log(error);
             }

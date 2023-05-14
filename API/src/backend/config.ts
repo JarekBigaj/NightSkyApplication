@@ -5,7 +5,7 @@ export type TConfig = {
     server: TServerConfig
 }
 const env = (process.env.NODE_ENV || 'production') as TEnv
-const API_PORT = 3000
+const API_PORT = 3600
 export const config: TConfig = {
     env,
     server: {
