@@ -6,15 +6,16 @@ import { prisma } from '../../database'
 import { checkPrismaError } from '../../utils'
 
 export const AddConstellation: RequestHandler = async (req, res) => {
-    const { id, name } = req.body
+    const { name } = req.body
 
     try {
     const createdConstellation = await prisma.constellation.create({
         data: {
-            id,
+            id: v4(),
             name
         },
     })
+    res.send(createdConstellation);
     res.status(StatusCodes.OK)
 } catch (err) {
 console.error(err)

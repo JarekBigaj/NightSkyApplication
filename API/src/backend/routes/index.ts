@@ -7,6 +7,7 @@ import { getAllDataConstellations } from './constellations/get.AllDataConstellat
 import { getDataSelectedStar } from './stars/get.dataSelectedStar'
 import { getDataSelectedConstellation } from './constellations/get.dataSelectedConstellation'
 import { EditSelectedStar} from './stars/put.EditSelectedStar'
+import { EditSelectedConstellations} from './constellations/put.EditSelectedConstellations'
 import { DeleteSelectedStar } from './stars/delete.deleteSelectedStar'
 import { DeleteSelectedConstellation } from './constellations/delete.DataSelectedConstellation'
 

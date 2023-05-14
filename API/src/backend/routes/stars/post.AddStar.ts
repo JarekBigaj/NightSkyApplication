@@ -17,6 +17,7 @@ export const AddStar: RequestHandler = async (req, res) => {
             constellationId,
         },
     })
+    res.send(createdStar);
     res.status(StatusCodes.OK)
 } catch (err) {
 console.error(err)
