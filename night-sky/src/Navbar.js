@@ -1,26 +1,29 @@
 import styled from "styled-components"
-import {Link} from "react-router-dom"
+import {Link, useMatch, useResolvedPath} from "react-router-dom"
 
 export default function Navbar(){
     return (
         <Nav>
             <Link className="site-title" to="/">NightSky</Link>
             <ul>
-                <li>
-                    <Link to="/addStar">Add Star</Link>
-                </li>
-                <li>
-                    <Link to="/addConstellation">Add Constellation</Link>
-                </li>
-                <li>
-                    <Link to="/listOfStars">List of Stars</Link>
-                </li>
-                <li>
-                    <Link to="/listOfConstellations">List of Constellations</Link>
-                </li>
+                <CustomLink to="/listOfStars">Stars</CustomLink>
+                <CustomLink to="/listOfConstellations">Constellation</CustomLink>
             </ul>
         </Nav>
         )
+}
+
+const CustomLink = ({to,children,...props}) =>{
+    const resolvedPath = useResolvedPath(to);
+    const isActive = useMatch({path: resolvedPath.pathname, end:true})
+
+    return (
+        <li className={isActive? "active": ""}>
+            <Link to={to} {...props}>
+                {children}
+            </Link>
+        </li>
+    )
 }
 
 const Nav = styled.nav`
