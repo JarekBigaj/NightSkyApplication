@@ -1,21 +1,22 @@
 import styled from "styled-components"
+import {Link} from "react-router-dom"
 
 export default function Navbar(){
     return (
         <Nav>
-            <a className="site-title" href="/">NightSky</a>
+            <Link className="site-title" to="/">NightSky</Link>
             <ul>
                 <li>
-                    <a href="/addStar">Add Star</a>
+                    <Link to="/addStar">Add Star</Link>
                 </li>
                 <li>
-                    <a href="/addConstellation">Add Constellation</a>
+                    <Link to="/addConstellation">Add Constellation</Link>
                 </li>
                 <li>
-                    <a href="/listOfStars">List of Stars</a>
+                    <Link to="/listOfStars">List of Stars</Link>
                 </li>
                 <li>
-                    <a href="/listOfConstellations">List of Constellations</a>
+                    <Link to="/listOfConstellations">List of Constellations</Link>
                 </li>
             </ul>
         </Nav>
