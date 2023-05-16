@@ -29,12 +29,20 @@ export default function ListOfConstellations (){
         return json;
     }
 
+    const selectedData = (response) => {
+        return response.map(value => {
+            return {
+                id: value.id,
+                name: value.name,
+            }
+        })
+    }
+
     useEffect(() => {
         (async () =>{
             try{
                 const response = await getConstellationsList();
-                setConstellationsData(response);
-                console.log(response);
+                setConstellationsData(selectedData(response));
             } catch (error) {
                 console.log(error);
             }

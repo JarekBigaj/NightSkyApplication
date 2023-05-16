@@ -28,7 +28,7 @@ function ListOfStars(){
         const json = await response.json();
         return json;
     }
-
+// TODO : make this function more universal for other elements.
     const selectedData = (response) => {
         return response.map(value => {
             return {
@@ -38,7 +38,6 @@ function ListOfStars(){
             }
         })
     }
-
     useEffect(() => {
         (async () =>{
             try{
