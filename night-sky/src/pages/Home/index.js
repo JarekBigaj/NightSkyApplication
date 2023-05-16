@@ -1,3 +1,4 @@
+import AddConstellation from "../addConstellation"
 import AddStar from "../addStar"
 
 export default function Home (){
@@ -6,6 +7,7 @@ export default function Home (){
         <div>
             <h1>Home</h1>
             <AddStar/>
+            <AddConstellation/>
         </div>
     )
 

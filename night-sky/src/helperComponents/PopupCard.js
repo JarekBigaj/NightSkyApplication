@@ -1,33 +1,27 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-const PopupCard = styled(({className,handleInputChange,handleFormSubmit,formData})=> {
+const PopupCard = styled(({className,handleInputChange,handleFormSubmit,formData,buttonName})=> {
     const [isOpen, setIsOpen] = useState(false);
     const togglePopup = () => {
         setIsOpen(!isOpen);
     };
     return (
         <div className={className}>
-            <button onClick={togglePopup}>Add Star</button>
+            <button onClick={togglePopup}>{buttonName}</button>
             {isOpen && (
               <div className="popup-card">
                 <form onSubmit={handleFormSubmit}>
-                  <label>
-                    Name:
-                    <input type="text" name="name" value={formData.name} onChange={handleInputChange} />
-                  </label>
-                  <label>
-                    Description:
-                    <textarea name="description" value={formData.description} onChange={handleInputChange} />
-                  </label>
-                  <label>
-                    urlImage:
-                    <input type="text" name="urlImage" value={formData.urlImage} onChange={handleInputChange} />
-                  </label>
-                  <label>
-                    Constellation:
-                    <input type="text" name="constellationId" value={formData.constellationId} onChange={handleInputChange} />
-                  </label>
+                    {
+                        Object.entries(formData).map(([key,value])=>{
+                            return (
+                                <div key={key+"div"}>
+                                    <label key={key+"label"}>{key + " :"}</label>
+                                    <input key={key} type="text" name={key} value={value} onChange={handleInputChange} />
+                                </div>
+                            )
+                        })
+                    }
                   <button type="submit">Submit</button>
                 </form>
               </div>
@@ -35,7 +29,7 @@ const PopupCard = styled(({className,handleInputChange,handleFormSubmit,formData
         </div>
     )
 })`
-position: fixed;
+position:relative;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
@@ -66,5 +60,8 @@ button {
   margin-top: 10px;
 }
 `;
+
+
+
 
 export default PopupCard;

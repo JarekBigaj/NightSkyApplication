@@ -31,7 +31,12 @@ const AddStar = () => {
   };
   
   return (
-    <PopupCard formData={formData} handleInputChange={handleInputChange} handleFormSubmit={handleFormSubmit}/>
+    <PopupCard 
+        buttonName="Add Star"
+        formData={formData} 
+        handleInputChange={handleInputChange} 
+        handleFormSubmit={handleFormSubmit}
+        />
   );
 };
 
