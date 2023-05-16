@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 const Table = styled(({className,props,passedNameProperties}) => {
     const elements = props;
     const nameOfProps = passedNameProperties;
@@ -17,8 +18,14 @@ const Table = styled(({className,props,passedNameProperties}) => {
                     {
                         elements.map((element) => (
                             <TableRow key={element.id}>
-                                <TableCell>{element.name}</TableCell>
-                                <TableCell>{element.constellationId}</TableCell>
+                              {
+                                // console.log(Object.values(element))
+                                Object.values(element).map((value)=>{
+                                  if(value !== element.id){
+                                    return <TableCell key={value+"cell"}>{value}</TableCell>
+                                  }
+                                })
+                              }
                             </TableRow>
                         ))
                     }

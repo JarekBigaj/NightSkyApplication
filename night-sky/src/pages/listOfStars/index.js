@@ -29,12 +29,21 @@ function ListOfStars(){
         return json;
     }
 
+    const selectedData = (response) => {
+        return response.map(value => {
+            return {
+                id: value.id,
+                name: value.name,
+                constellationId: value.constellationId
+            }
+        })
+    }
+
     useEffect(() => {
         (async () =>{
             try{
                 const response = await getStarsList();
-                setStarsData(response);
-                console.log(response);
+                setStarsData(selectedData(response));
             } catch (error) {
                 console.log(error);
             }
@@ -46,7 +55,8 @@ function ListOfStars(){
         const lastPageIndex = firstPageIndex + PageSize;
         return starsData.slice(firstPageIndex, lastPageIndex);
       }, [currentPage,starsData]);
-    
+
+
     const starsProperties = ["Name","Constellation"];
     return (
         <div>

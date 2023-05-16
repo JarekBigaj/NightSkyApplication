@@ -46,6 +46,8 @@ export default function ListOfConstellations (){
         const lastPageIndex = firstPageIndex + PageSize;
         return constellationsData.slice(firstPageIndex, lastPageIndex);
       }, [currentPage,constellationsData]);
+
+   
     
     const ConstellationsProperties = ["Name"];
     return (
