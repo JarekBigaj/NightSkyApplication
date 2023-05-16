@@ -1,5 +1,5 @@
 import Table from "../../helperComponents/TableOfElements";
-import styled, {ThemeProvider} from "styled-components";
+import {ThemeProvider} from "styled-components";
 import Pagination from "../../helperFunctions/Pagination";
 import { useState, useEffect,useMemo } from "react";
 

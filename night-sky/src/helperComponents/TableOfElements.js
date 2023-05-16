@@ -23,6 +23,7 @@ const Table = styled(({className,props,passedNameProperties}) => {
                                   if(value !== element.id){
                                     return <TableCell key={value+"cell"}>{value}</TableCell>
                                   }
+                                  return null;
                                 })
                               }
                             </TableRow>

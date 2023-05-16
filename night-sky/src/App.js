@@ -4,7 +4,6 @@ import Navbar from "./Navbar";
 import Home from "./pages/Home";
 import {Route, Routes} from "react-router-dom"
 import ListOfConstellations from  "./pages/listOfConstellations"
-import AddStar from "./pages/addStar";
 
 function App() {
 
@@ -19,7 +18,6 @@ function App() {
           <Route path="/ListOfConstellations" element={<ListOfConstellations/>}/>
         </Routes>
       </div>
-      <AddStar/>
     </div>
   );
 }
