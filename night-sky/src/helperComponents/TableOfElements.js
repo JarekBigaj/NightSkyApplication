@@ -19,7 +19,6 @@ const Table = styled(({className,props,passedNameProperties}) => {
                         elements.map((element) => (
                             <TableRow key={element.id}>
                               {
-                                // console.log(Object.values(element))
                                 Object.values(element).map((value)=>{
                                   if(value !== element.id){
                                     return <TableCell key={value+"cell"}>{value}</TableCell>

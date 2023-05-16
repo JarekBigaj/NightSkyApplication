@@ -8,7 +8,7 @@ export default function Navbar(){
             <ul>
                 <CustomLink to="/listOfStars">Stars</CustomLink>
                 <CustomLink to="/listOfConstellations">Constellation</CustomLink>
-            </ul>
+            </ul>        
         </Nav>
         )
 }
