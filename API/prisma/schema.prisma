@@ -16,12 +16,14 @@ model Star {
   description     String
   urlImage        String
   constellationId String
+  isActive        Boolean @default(true)
   
   constellation   Constellation @relation(fields: [constellationId], references: [id])
 }
 
 model Constellation {
-  id    String  @id
-  name  String
-  stars Star[]
+  id          String  @id
+  name        String
+  isActive    Boolean @default(true)
+  stars       Star[]
 }
