@@ -7,8 +7,8 @@ export default function Navbar(){
             <Link className="site-title" to="/">NightSky</Link>
             <ul>
                 <CustomLink to={"/"}>Home</CustomLink>
-                <CustomLink to="/listOfStars">Stars</CustomLink>
-                <CustomLink to="/listOfConstellations">Constellation</CustomLink>
+                <CustomLink to={"/listOfStars"}>Stars</CustomLink>
+                <CustomLink to={"/listOfConstellations"}>Constellation</CustomLink>
             </ul>        
         </Nav>
         )

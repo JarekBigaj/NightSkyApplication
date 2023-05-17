@@ -1,5 +1,6 @@
 import NightSkyWeather from "./NightSkyWeather";
 import ListOfStars from "./pages/listOfStars";
+import ConstellationInfoCard from "./pages/infoElements/constellationInfoCard";
 import Navbar from "./Navbar";
 import Home from "./pages/Home";
 import StarInfoCard from "./pages/infoElements/starInfoCard";
@@ -18,6 +19,7 @@ function App() {
           <Route path="/ListOfStars" element={<ListOfStars/>}/>
           <Route path="/ListOfConstellations" element={<ListOfConstellations/>}/>
           <Route path="/starInfoCard" element={<StarInfoCard/>}/>
+          <Route path="/constellationInfoCard" element={<ConstellationInfoCard/>}/>
         </Routes>
       </div>
     </div>

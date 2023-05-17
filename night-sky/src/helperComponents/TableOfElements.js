@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 
-const Table = styled(({className,props,passedNameProperties}) => {
+const Table = styled(({className,props,passedNameProperties,to}) => {
     const elements = props;
     const nameOfProps = passedNameProperties;
     return (
@@ -19,6 +19,7 @@ const Table = styled(({className,props,passedNameProperties}) => {
                     {
                         elements.map((element) => (
                             <TableRow key={element.id}>
+                              <Link to={`${to}?id=${element.id}`}>
                               {
                                 Object.values(element).map((value)=>{
                                   if(value !== element.id){
@@ -27,6 +28,7 @@ const Table = styled(({className,props,passedNameProperties}) => {
                                   return null;
                                 })
                               }
+                              </Link>
                             </TableRow>
                         ))
                     }

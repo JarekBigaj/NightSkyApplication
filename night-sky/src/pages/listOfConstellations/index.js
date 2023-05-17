@@ -61,7 +61,11 @@ export default function ListOfConstellations (){
     return (
         <div>
         <ThemeProvider theme={theme}>
-            <Table props={currentTableData} passedNameProperties={ConstellationsProperties}/>
+            <Table 
+                props={currentTableData} 
+                passedNameProperties={ConstellationsProperties}
+                to={"/constellationInfoCard"}
+            />
         </ThemeProvider>
         <Pagination
             className="pagination-bar"

@@ -60,7 +60,11 @@ function ListOfStars(){
     return (
         <div>
             <ThemeProvider theme={theme}>
-                <Table props={currentTableData} passedNameProperties={starsProperties}/>
+                <Table 
+                    props={currentTableData} 
+                    passedNameProperties={starsProperties}
+                    to={"/starInfoCard"}
+                />
             </ThemeProvider>
             <Pagination
                 className="pagination-bar"
