@@ -4,9 +4,16 @@ import { prisma } from '../../database'
 import { checkPrismaError } from '../../utils'
 
 export const getAllDataStars: RequestHandler = async (req,res) => {
-
+    const { name } = req.body
     try{
-        const AllStars = await prisma.star.findMany();
+        const AllStars = await prisma.star.findMany({
+            where: {
+                name: {
+                    contains: name,
+                }
+            }
+        });
+
 
         res.send(AllStars)
         res.status(StatusCodes.OK)
