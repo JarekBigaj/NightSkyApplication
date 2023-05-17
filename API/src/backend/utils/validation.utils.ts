@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { StatusCodes, ReasonPhrases } from 'http-status-codes'
 
 export const ValidateAddStar = (star: any) => {
     const StarSchema = Joi.object({
@@ -18,7 +19,7 @@ export const ValidateAddStar = (star: any) => {
         .max(255)
         .required(),
 
-        constellationID: Joi.string()
+        constellationId: Joi.string()
         .length(36)
         .lowercase()
         .required(),
