@@ -1,52 +1,46 @@
 import Joi from "joi";
 
-const validateAddStar = Joi.object({
-    name: Joi.string()
-    .min(2)
-    .max(60)
-    .lowercase()
-    .required(),
+export const ValidateAddStar = (star: any) => {
+    const StarSchema = Joi.object({
+        name: Joi.string()
+        .min(2)
+        .max(60)
+        .lowercase()
+        .required(),
 
-    description: Joi.string()
-    .min(10)
-    .max(255)
-    .required(),
+        description: Joi.string()
+        .min(10)
+        .max(255)
+        .required(),
 
-    urlImage: Joi.string()
-    .min(10)
-    .max(255)
-    .required(),
+        urlImage: Joi.string()
+        .min(10)
+        .max(255)
+        .required(),
 
-    constellationID: Joi.string()
-    .length(36)
-    .lowercase()
-    .required(),
+        constellationID: Joi.string()
+        .length(36)
+        .lowercase()
+        .required(),
 
-    isActive: Joi.boolean()
-})
+        isActive: Joi.boolean()
+    });
 
-const validateAddContellation = Joi.object({
-    name: Joi.string()
-    .min(2)
-    .max(60)
-    .lowercase()
-    .required(),
+    return StarSchema.validate(star);
+}
 
-    description: Joi.string()
-    .min(10)
-    .max(255)
-    .required(),
+export const ValidateAddConstellation = (constellation: any) => {
+    const constellationSchema = Joi.object({
+        name: Joi.string()
+        .min(2)
+        .max(60)
+        .lowercase()
+        .required(),
 
-    urlImage: Joi.string()
-    .min(10)
-    .max(255)
-    .required(),
+        isActive: Joi.boolean()
 
-    constellationID: Joi.string()
-    .length(36)
-    .lowercase()
-    .required(),
+    });
 
-    isActive: Joi.boolean()
+    return constellationSchema.validate(constellation)
 
-})
+}
