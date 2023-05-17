@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import styled from "styled-components";
 
 
 const Table = styled(({className,props,passedNameProperties,to}) => {
+    const navigate = useNavigate();
     const elements = props;
     const nameOfProps = passedNameProperties;
     return (
@@ -18,8 +19,9 @@ const Table = styled(({className,props,passedNameProperties,to}) => {
                 <tbody>
                     {
                         elements.map((element) => (
-                            <TableRow key={element.id}>
-                              <Link to={`${to}?id=${element.id}`}>
+                            <TableRow key={element.id} onClick={()=>{
+                              navigate(`${to}?id=${element.id}`)
+                            }}>
                               {
                                 Object.values(element).map((value)=>{
                                   if(value !== element.id){
@@ -28,7 +30,6 @@ const Table = styled(({className,props,passedNameProperties,to}) => {
                                   return null;
                                 })
                               }
-                              </Link>
                             </TableRow>
                         ))
                     }
