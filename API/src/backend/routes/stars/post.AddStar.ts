@@ -2,7 +2,7 @@ import { RequestHandler } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import { v4 } from 'uuid'
 import { prisma } from '../../database'
-import { checkPrismaError } from '../../utils'
+import { checkPrismaError } from '../../utils/prisma.utils'
 
 export const AddStar: RequestHandler = async (req, res) => {
     const { name, description, urlImage, constellationId } = req.body
