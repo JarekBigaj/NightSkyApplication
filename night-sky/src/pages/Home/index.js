@@ -17,9 +17,10 @@ const Home = styled(({className}) => {
 })`
 
     .button-wrapper{
+        position:absolute;
         display:flex;
-        align-content:center;
-        justify-content:center;
+        bottom:0;
+        width:100%;
     }
 `;
 
