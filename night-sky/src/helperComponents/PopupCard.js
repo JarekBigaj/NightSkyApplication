@@ -29,12 +29,14 @@ const PopupCard = styled(({className,handleInputChange,handleFormSubmit,formData
         </div>
     )
 })`
-top: 50%;
-left: 50%;
+position:absolute;
+bottom:0px;
+display:grid;
+grid-column:auto auto;
 transform: translate(-50%, -50%);
-width: 400px;
+width: auto;
 padding: 20px;
-background-color: #ffffff;
+background-color: #fff;
 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 z-index: 9999;
 
@@ -54,8 +56,6 @@ textarea {
   padding: 5px;
 }
 
-button {
-}
 `;
 
 
