@@ -1,10 +1,10 @@
 import { RequestHandler } from "express"
 import { StatusCodes } from 'http-status-codes'
 import { prisma } from '../../database'
-import { checkPrismaError } from '../../utils'
+import { checkPrismaError } from '../../utils/prisma.utils'
 
 export const getAllDataStars: RequestHandler = async (req,res) => {
-    const { name } = req.body
+    const name  = req.query.name as string
     try{
         const AllStars = await prisma.star.findMany({
             where: {

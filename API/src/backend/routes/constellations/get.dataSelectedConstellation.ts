@@ -1,10 +1,10 @@
 import { RequestHandler } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import { prisma } from '../../database'
-import { checkPrismaError } from '../../utils'
+import { checkPrismaError } from '../../utils/prisma.utils'
 
 export const getDataSelectedConstellation: RequestHandler = async (req, res) => {
-  const { id } = req.body
+  const id = req.query.id as string
   try{
     const getConstellation = await prisma.constellation.findUnique({
       where: {
