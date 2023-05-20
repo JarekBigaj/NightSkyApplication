@@ -15,7 +15,7 @@ const PRECIPITATION_TYPES = [
     {id:`sleet`, name:`Sleet`}
 ];
 
-function NightSkyWeather(){
+const NightSkyWeather = styled(({className}) => {
     const [nightSkyWeather,  setNightSkyWeather] = useState(() =>{
         return {
                 cloudinessLevel: 5,
@@ -25,6 +25,8 @@ function NightSkyWeather(){
                 fogDensityLevel: 5
             }
     });
+
+    const [sideBarIsActive,setSideBarIsActive] = useState(false);
 
     const handleCloudinessChange = (event) => {
         setNightSkyWeather(prevState => ({
@@ -61,6 +63,10 @@ function NightSkyWeather(){
         });
     };
 
+    const changeStatusSidebar = () =>{
+        setSideBarIsActive((prevState)=> !prevState);
+    };
+
     useEffect(()=>{
         if(nightSkyWeather.cloudinessLevel===0){
             setNightSkyWeather(prevState => ({
@@ -71,86 +77,161 @@ function NightSkyWeather(){
         }
         
     },[nightSkyWeather.cloudinessLevel])
-
-    console.log(nightSkyWeather)
     const {cloudinessLevel,isPrecipitation,typeOfPrecipitaion,lunarPhase,fogDensityLevel} = nightSkyWeather;
     return (
-        <AppContainer>
-            <SliderWrapper name="cloudinessLevel">
-                <Label value="Cloudiness Level : "/>
-                <Slider type="range" min="0" max="10" value={cloudinessLevel} onChange={handleCloudinessChange} />
-                <Label value={cloudinessLevel}/>
-            </SliderWrapper>
-            <CheckBoxWrapper>
-                <Label value="Precipitation : "/>
-                <Input type="checkbox" 
-                    checked={isPrecipitation} 
-                    value={isPrecipitation}
-                    onChange={handlePrecipitationChange} 
-                    disabled={cloudinessLevel === 0}/>
-            </CheckBoxWrapper>
-            <CheckBoxWrapper className="radio-box">
-                {isPrecipitation &&(
-                    PRECIPITATION_TYPES.map((type) => (
-                        <label key={type.id}>
+        <div className={`${className}`}>
+            <div className={`sidebar ${sideBarIsActive ? "active" :""}`}>
+                <div className="top">
+                    <div className="logo">
+                       <i className="bx bxl-codepen"></i>
+                       <span>Night Sky Weather</span>
+                    </div>
+                    <i className="bx bx-menu" id="btn" onClick={changeStatusSidebar}></i>
+                </div>
+                <div className="weather">
+                    <SliderWrapper name="cloudinessLevel">
+                        <Label value="Cloudiness Level : "/>
+                        <Slider type="range" min="0" max="10" value={cloudinessLevel} onChange={handleCloudinessChange} />
+                        <Label value={cloudinessLevel}/>
+                    </SliderWrapper>
+                    <CheckBoxWrapper>
+                        <label>Precipitation : </label>
+                        <Input type="checkbox" 
+                            checked={isPrecipitation} 
+                            value={isPrecipitation}
+                            onChange={handlePrecipitationChange} 
+                            disabled={cloudinessLevel === 0}/>
+                    </CheckBoxWrapper>
+                    <CheckBoxWrapper className="radio-box">
+                        {isPrecipitation &&(
+                            PRECIPITATION_TYPES.map((type) => (
+                                <label key={type.id} className="input-label">
+                                    <Input
+                                        type="radio"
+                                        name="type-precipitation"
+                                        value={type.id}
+                                        checked={typeOfPrecipitaion === type.id}
+                                        onChange={handlePrecipitationTypeChange}/>
+                                    {type.name}
+                                </label>
+                            ))
+                        )}
+                    </CheckBoxWrapper>
+                    <CheckBoxWrapper className="radio-box">
+                        {LUNAR_PHASES.map((phase) => (
+                            <label key={phase.id} className="input-label">
                             <Input
                                 type="radio"
-                                name="type-precipitation"
-                                value={type.id}
-                                checked={typeOfPrecipitaion === type.id}
-                                onChange={handlePrecipitationTypeChange}/>
-                            {type.name}
-                        </label>
-                    ))
-                )}
-            </CheckBoxWrapper>
-            <CheckBoxWrapper className="radio-box">
-                {LUNAR_PHASES.map((phase) => (
-                    <label key={phase.id}>
-                    <Input
-                        type="radio"
-                        name="lunar-phase"
-                        value={phase.id}
-                        checked={lunarPhase === phase.id}
-                        onChange={handlePhaseChange}
-                    />
-                    {phase.name}
-                    </label>
-                ))}
-            </CheckBoxWrapper>
-            <SliderWrapper name="fogDensityLevel">
-                <Label value="Fog Density Level : "/>
-                <Slider type="range" min="0" max="10" value={fogDensityLevel} onChange={handleFogChange} />
-                <Label value={fogDensityLevel}/>
-            </SliderWrapper>
-            
-        </AppContainer>
+                                name="lunar-phase"
+                                value={phase.id}
+                                checked={lunarPhase === phase.id}
+                                onChange={handlePhaseChange}
+                            />
+                            {phase.name}
+                            </label>
+                        ))}
+                    </CheckBoxWrapper>
+                    <SliderWrapper name="fogDensityLevel">
+                        <Label value="Fog Density Level : "/>
+                        <Slider type="range" min="0" max="10" value={fogDensityLevel} onChange={handleFogChange} />
+                        <Label value={fogDensityLevel}/>
+                    </SliderWrapper>
+                </div>
+            </div> 
+        </div>
         )
-}
-
-const AppContainer = styled(({className,children}) =>{
-    return <div className={className}>{children}</div>
 })`
-  
-`;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+    .sidebar{
+        padding:.4rem 3rem;
+        background-color:white;
+        width:250px;
+        position: absolute;
+        top:4.5rem;
+        left:0;
+        height:30vw;
+        transition: all 0.5s ease;
+    }
+
+    div.active {
+        width: 40%;
+        background-color:black;
+    }
+
+    #btn{
+        position: absolute;
+        color: green;
+        top: .4rem;
+        left: .4rem;
+        font-size: 2rem;
+        line-height: 50px;
+        cursor: pointer;
+    }
+
+    .top .logo {
+        color: green;
+        display: flex;
+        height: 50px;
+        align-items:center;
+        width:100%;
+        pointer-events:none;
+        opacity:0;
+    }
+
+    .sidebar.active .top .logo{
+        opacity:1;
+    }
+
+    .top .logo i{
+        font-size: 2rem;
+        margin-right: 5px;
+    }
+
+    .weather{
+        dipslay: flex;
+        align-items: center;
+        margin: 1rem 0;
+        font-size: 1.3rem;
+        font-weight:300;
+    }
+
+    .weather label{
+        color:white;
+        opacity:0;
+    }
+
+    .weather input{
+        opacity:0;
+    }
+
+    .sidebar.active .weather input{
+        opacity:1;
+    }
+
+    .sidebar.active .weather label{
+        opacity:1;
+    }
+    
+    .input-label:hover{
+        color:blue;
+        cursor:pointer;
+    }
+    
+`
 
 const Label = styled(({className,value}) => {
     return <label className={className}>{value}</label>
 })`
-
---grey-light: #f5f5f5;
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  &.has-text-grey-light {
-    color: var(--grey-light);
-  }
 `;
 
 const CheckBoxWrapper = styled (({className,children})=>{
     return <div className={className}>{children}</div>
 })`
-
+    margin:10px 0px;
+    display:flex;
 `;
 
 const SliderWrapper = styled(({className,name,children})=>{
@@ -162,6 +243,7 @@ const SliderWrapper = styled(({className,name,children})=>{
 const Input = styled(({className,checked,type,value,onChange,name,disabled})=>{
     return <input className={className} checked={checked} name={name} type={type} value={value} onChange={onChange} disabled={disabled}/>
 })`
+    cursor: pointer;
 
 `;
 

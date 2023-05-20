@@ -8,7 +8,6 @@ const Home = styled(({className}) => {
     return (
         <div className={className}>
             <NightSkyWeather/>
-            <h1>Home</h1>
             <div className="button-wrapper">
                 <AddStar/>
                 <AddConstellation/>
