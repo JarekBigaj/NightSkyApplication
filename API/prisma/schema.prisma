@@ -12,7 +12,7 @@ datasource db {
 
 model Star {
   id              String   @id
-  name            String
+  name            String   
   description     String
   urlImage        String
   constellationId String
@@ -22,8 +22,10 @@ model Star {
 }
 
 model Constellation {
-  id          String  @id
-  name        String
-  isActive    Boolean @default(true)
-  stars       Star[]
+  id              String  @id
+  name            String 
+  description     String?
+  urlImage        String?
+  isActive        Boolean @default(true)
+  stars           Star[]
 }
