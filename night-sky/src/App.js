@@ -12,7 +12,6 @@ function App() {
   return (
     <div>
       <Navbar/>
-      <NightSkyWeather/>
       <div className="container">
         <Routes>
           <Route path="/" element={<Home/>}/>

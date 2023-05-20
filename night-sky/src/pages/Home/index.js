@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import NightSkyWeather from "../../NightSkyWeather";
 import AddConstellation from "../addConstellation"
 import AddStar from "../addStar"
 
@@ -6,6 +7,7 @@ const Home = styled(({className}) => {
 
     return (
         <div className={className}>
+            <NightSkyWeather/>
             <h1>Home</h1>
             <div className="button-wrapper">
                 <AddStar/>

@@ -7,6 +7,7 @@ const API_GET_CONSTELLATION_DATA = `http://127.0.0.1:3600/api/constellations/get
 
 const StarInfoCard = styled(({className}) => {
     const [currentStarData,setCurrentStarData] = useState([]);
+    const [constellationData,setConstellationData] = useState([]);
 
     const querryString = window.location.search;
     const urlParams = new URLSearchParams(querryString);
@@ -22,6 +23,8 @@ const StarInfoCard = styled(({className}) => {
     const getConstellationData = async (constellationId) =>{
         const response = await fetch(`${API_GET_CONSTELLATION_DATA}?id=${constellationId}`);
         if(!response.ok) throw new Error(`This is an HTTP error: The status is ${response.status}`);
+        const json = await response.json();
+        return json;
     } 
 
     useEffect(() => {
@@ -35,8 +38,21 @@ const StarInfoCard = styled(({className}) => {
         })()
     },[])
 
+    useEffect(() => {
+        (async () =>{
+            try{
+                const constellationId = currentStarData.constellationId;
+                const response = await getConstellationData(constellationId);
+                setConstellationData(response);
+            } catch (error) {
+                console.log(error);
+            }
+        })()
+    },[currentStarData])
+
+
     return (
-        <CustomInfoCard props={currentStarData}/>
+        <CustomInfoCard starProps={currentStarData} constellationProps={constellationData}/>
     )
 })`
 
