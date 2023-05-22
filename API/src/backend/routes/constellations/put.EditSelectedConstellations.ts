@@ -6,7 +6,7 @@ import { ValidateAddConstellation } from '../../utils/validation.utils'
 
 export const EditSelectedConstellations: RequestHandler = async (req,res) => {
 
-    const { id, name, description, urlImage, isActive } = req.body
+    const { id, name, description, urlImage, isActive, isDead } = req.body
     const validatedData = ValidateAddConstellation(req.body)
 
     if (validatedData.error){
@@ -28,7 +28,8 @@ export const EditSelectedConstellations: RequestHandler = async (req,res) => {
               name,
               description,
               urlImage,
-              isActive
+              isActive,
+              isDead
             },
           })
 
