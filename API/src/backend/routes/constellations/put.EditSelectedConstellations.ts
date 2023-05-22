@@ -32,7 +32,7 @@ export const EditSelectedConstellations: RequestHandler = async (req,res) => {
               isDead
             },
           })
-
+        res.send(EditedConstellations)
         res.status(StatusCodes.OK)
 
     } catch (err) {
