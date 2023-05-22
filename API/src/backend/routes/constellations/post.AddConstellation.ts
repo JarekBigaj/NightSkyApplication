@@ -9,7 +9,7 @@ import { ValidateAddConstellation } from '../../utils/validation.utils'
 
 export const AddConstellation: RequestHandler = async (req, res) => {
     req.body.id = v4();
-    const {id, name, description, urlImage, isActive } = req.body
+    const {id, name, description, urlImage, isActive, isDead } = req.body
     const validatedData = ValidateAddConstellation(req.body)
 
     if (validatedData.error){
@@ -29,7 +29,8 @@ export const AddConstellation: RequestHandler = async (req, res) => {
             name,
             description,
             urlImage,
-            isActive
+            isActive,
+            isDead
         },
     })
     res.send(createdConstellation);
