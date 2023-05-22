@@ -7,7 +7,7 @@ import { ValidateAddStar } from '../../utils/validation.utils'
 
 export const AddStar: RequestHandler = async (req, res) => {
     req.body.id = v4()
-    const { id, name, description, urlImage, constellationId, isActive } = req.body
+    const { id, name, description, urlImage, constellationId, isActive, isDead } = req.body
     const validatedData = ValidateAddStar(req.body)
 
     if (validatedData.error){
@@ -28,7 +28,8 @@ export const AddStar: RequestHandler = async (req, res) => {
                     description,
                     urlImage,
                     constellationId,
-                    isActive
+                    isActive,
+                    isDead
                 },
             })
             res.send(createdStar);

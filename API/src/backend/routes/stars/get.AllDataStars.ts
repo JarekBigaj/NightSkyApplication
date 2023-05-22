@@ -12,7 +12,8 @@ export const getAllDataStars: RequestHandler = async (req,res) => {
                 constellationId: constellationId,
                 name: {
                     contains: name,
-                }
+                },
+                isDead: false
             }
         });
 
