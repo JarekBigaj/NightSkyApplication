@@ -152,7 +152,7 @@ const NightSkyWeather = styled(({className}) => {
         position: absolute;
         top:4.5rem;
         left:0;
-        height:30vw;
+        height:350px;
         transition: all 0.5s ease;
     }
 

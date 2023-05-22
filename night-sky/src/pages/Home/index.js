@@ -16,13 +16,16 @@ const Home = styled(({className}) => {
     )
 
 })`
-
-    .button-wrapper{
-        position: absolute;
-        bottom:0;
-        display:flex;
-        align-content:center;
-    }
+.button-wrapper {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Adjust the column widths as needed */
+    justify-items: center; /* Center the buttons horizontally within each column */
+    gap: 10px; /* Adjust the gap between buttons as desired */
+  }
 `;
 
 export default Home;

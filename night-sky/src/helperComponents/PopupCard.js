@@ -8,50 +8,49 @@ const PopupCard = styled(({className,handleInputChange,handleFormSubmit,formData
     };
     return (
         <div className={className}>
-            <button onClick={togglePopup}>{buttonName}</button>
+            <button className="show-form" onClick={togglePopup}>{buttonName}</button>
             {isOpen && (
               <div className="popup-card">
-                <form onSubmit={handleFormSubmit}>
-                    {
-                        Object.entries(formData).map(([key,value])=>{
-                            return (
-                                <div key={key+"div"}>
-                                    <label key={key+"label"}>{key + " :"}</label>
-                                    <input key={key} type="text" name={key} value={value} onChange={handleInputChange} />
-                                </div>
-                            )
-                        })
-                    }
-                  <button type="submit">Submit</button>
-                </form>
+                <div className="popup-content">
+                  <button className="exit" onClick={togglePopup}>X</button>
+                  <form onSubmit={handleFormSubmit}>
+                      {
+                          Object.entries(formData).map(([key,value])=>{
+                              return (
+                                  <div key={key+"div"}>
+                                      <label key={key+"label"}>{key + " :"}</label>
+                                      <input key={key} type="text" name={key} value={value} onChange={handleInputChange} />
+                                  </div>
+                              )
+                          })
+                      }
+                    <button type="submit">Submit</button>
+                  </form>
+                </div>
               </div>
             )}
         </div>
     )
 })`
-padding: 20px;
-background-color: #fff;
-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-z-index: 9999;
-
-form {
-  display: grid;
-  grid-gap: 10px;
-}
-
-label {
-  display: block;
-  font-weight: bold;
-}
-
-input,
-textarea {
+position: relative;
+  
+.popup-card {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  padding: 5px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background overlay */
+  z-index: 9999;
 }
 
-button{
-  width:10rem;
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
 }
 
 `;
