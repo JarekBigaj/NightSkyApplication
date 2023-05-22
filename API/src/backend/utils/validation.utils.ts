@@ -28,7 +28,9 @@ export const ValidateAddStar = (star: any) => {
         .lowercase()
         .required(),
 
-        isActive: Joi.boolean()
+        isActive: Joi.boolean(),
+
+        isDead: Joi.boolean()
     });
 
     return StarSchema.validate(star);
@@ -56,7 +58,9 @@ export const ValidateAddConstellation = (constellation: any) => {
         .max(255)
         .required(),
 
-        isActive: Joi.boolean()
+        isActive: Joi.boolean(),
+
+        isDead: Joi.boolean()
 
     });
 
