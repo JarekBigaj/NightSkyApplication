@@ -18,10 +18,10 @@ const Home = styled(({className}) => {
 })`
 
     .button-wrapper{
-        position:absolute;
-        display:flex;
+        position: absolute;
         bottom:0;
-        width:100%;
+        display:flex;
+        align-content:center;
     }
 `;
 
