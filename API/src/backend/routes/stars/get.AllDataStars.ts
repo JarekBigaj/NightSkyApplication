@@ -5,12 +5,15 @@ import { checkPrismaError } from '../../utils/prisma.utils'
 
 export const getAllDataStars: RequestHandler = async (req,res) => {
     const name  = req.query.name as string
+    const constellationId  = req.query.constellationId as string
     try{
         const AllStars = await prisma.star.findMany({
             where: {
+                constellationId: constellationId,
                 name: {
                     contains: name,
-                }
+                },
+                isDead: false
             }
         });
 

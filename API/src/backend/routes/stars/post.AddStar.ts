@@ -6,7 +6,8 @@ import { checkPrismaError } from '../../utils/prisma.utils'
 import { ValidateAddStar } from '../../utils/validation.utils'
 
 export const AddStar: RequestHandler = async (req, res) => {
-    const { name, description, urlImage, constellationId } = req.body
+    req.body.id = v4()
+    const { id, name, description, urlImage, constellationId, isActive, isDead } = req.body
     const validatedData = ValidateAddStar(req.body)
 
     if (validatedData.error){
@@ -22,11 +23,13 @@ export const AddStar: RequestHandler = async (req, res) => {
         try {
             const createdStar = await prisma.star.create({
                 data: {
-                    id: v4(),
+                    id,
                     name, 
                     description,
                     urlImage,
                     constellationId,
+                    isActive,
+                    isDead
                 },
             })
             res.send(createdStar);

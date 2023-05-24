@@ -9,8 +9,9 @@ export const getAllDataConstellations: RequestHandler = async (req, res) => {
     const AllConstellations = await prisma.constellation.findMany({
       where: {
           name: {
-              contains: name,
-          }
+              contains: name
+          },
+          isDead: false
       }
   });
 
