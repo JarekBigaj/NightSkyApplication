@@ -1,16 +1,35 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { API_GET_CONSTELLATION_LIST } from "../server";
 
-const PopupCard = styled(({className,handleInputChange,handleFormSubmit,formData,buttonName})=> {
+const PopupCard = styled((
+  {className,
+  handleInputChange,
+  handleFormSubmit,
+  formData,
+  buttonName,
+  listOfConstellationsName,
+  isSubmitted,
+  handleIsSubmited})=> {
+
     const [isOpen, setIsOpen] = useState(false);
     const togglePopup = () => {
         setIsOpen(!isOpen);
+        handleIsSubmited();
     };
+
+
     return (
         <div className={className}>
             <button className="show-form" onClick={togglePopup}>{buttonName}</button>
             {isOpen && (
               <div className="popup-card">
+                {isSubmitted ? (
+                  <div>
+                    <h3>Form submitted successfully!</h3>
+                    <button onClick={togglePopup}>Reset</button>
+                  </div>
+                ) : (
                 <div className="popup-content">
                   <button className="exit" onClick={togglePopup}>X</button>
                   <form onSubmit={handleFormSubmit}>
@@ -19,14 +38,28 @@ const PopupCard = styled(({className,handleInputChange,handleFormSubmit,formData
                               return (
                                   <div key={key+"div"}>
                                       <label key={key+"label"}>{key + " :"}</label>
-                                      <input key={key} type="text" name={key} value={value} onChange={handleInputChange} />
+                                      {key === "constellationId" ?
+                                        <select value={value} name={key} onChange={handleInputChange}>
+                                          {listOfConstellationsName.map((constellation)=>{
+                                            const {id,name} = constellation;
+                                            return (
+                                              <option selected={name==="Orion"?"selected":""} key={id} value={id}  >
+                                                {name}
+                                              </option>
+                                              
+                                            )
+                                          })}
+                                        </select>
+                                      :
+                                        <input key={key} type="text" name={key} value={value} onChange={handleInputChange} />
+                                      }
                                   </div>
                               )
                           })
                       }
                     <button type="submit">Submit</button>
                   </form>
-                </div>
+                </div>)}
               </div>
             )}
         </div>

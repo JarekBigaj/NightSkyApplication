@@ -2,9 +2,7 @@ import { useState,useMemo, useEffect } from "react";
 import Pagination from "../../helperFunctions/Pagination";
 import { ThemeProvider } from "styled-components";
 import Table from "../../helperComponents/TableOfElements";
-import {API_GET_CONSTELLATION_LIST } from "../../server";
-
-const API_GET_STARS_LIST = `http://localhost:3600/api/stars/getAllDataStars`;
+import {API_GET_CONSTELLATION_LIST,API_GET_STARS_LIST } from "../../server";
 
 const PageSize = 3;
 
@@ -44,7 +42,7 @@ function ListOfStars(){
             return {
                 id: value.id,
                 name: value.name,
-                constellation: value.constellationId
+                constellation: value.constellationId,
             }
         })
     }
