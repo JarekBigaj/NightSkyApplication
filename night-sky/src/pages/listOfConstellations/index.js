@@ -2,8 +2,9 @@ import Table from "../../helperComponents/TableOfElements";
 import {ThemeProvider} from "styled-components";
 import Pagination from "../../helperFunctions/Pagination";
 import { useState, useEffect,useMemo } from "react";
+import { API_GET_CONSTELLATION_LIST } from "../../server";
 
-const API_GET_CONSTELLATIONS_LIST = "http://127.0.0.1:3600/api/constellations/getAllDataConstellations"
+// const API_GET_CONSTELLATIONS_LIST = "http://127.0.0.1:3600/api/constellations/getAllDataConstellations"
 
 const PageSize = 3;
 
@@ -23,7 +24,7 @@ export default function ListOfConstellations (){
     const [currentPage, setCurrentPage] = useState(1);
 
     const getConstellationsList = async () =>{
-        const response = await fetch(API_GET_CONSTELLATIONS_LIST);
+        const response = await fetch(API_GET_CONSTELLATION_LIST);
         if(!response.ok) throw new Error(`This is an HTTP error: The status is ${response.status}`);
         const json = await response.json();
         return json;

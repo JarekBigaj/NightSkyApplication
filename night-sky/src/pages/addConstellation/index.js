@@ -3,7 +3,9 @@ import PopupCard from '../../helperComponents/PopupCard';
 
 const AddConstellation = () => {
   const [formData, setFormData] = useState({
-    name: ''
+    name: '',
+    description: '',
+    urlImage: ''
   });
 
   const handleFormSubmit = e => {
