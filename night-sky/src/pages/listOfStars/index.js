@@ -4,7 +4,7 @@ import { ThemeProvider } from "styled-components";
 import Table from "../../helperComponents/TableOfElements";
 import {API_GET_CONSTELLATION_LIST,API_GET_STARS_LIST } from "../../server";
 
-const PageSize = 3;
+const PageSize = 10;
 
 const theme = {
     colors: {

@@ -74,6 +74,10 @@ const Table = styled(({className,props,passedNameProperties,to}) => {
     vertical-align: middle;
     border-bottom: 1px solid ${props => props.theme.colors.greyLighter};
   }
+
+  td{
+    cursor:pointer;
+  }
 `;
 
 

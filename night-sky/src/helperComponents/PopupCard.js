@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { API_GET_CONSTELLATION_LIST } from "../server";
 
 const PopupCard = styled((
   {className,
@@ -8,14 +7,11 @@ const PopupCard = styled((
   handleFormSubmit,
   formData,
   buttonName,
-  listOfConstellationsName,
-  isSubmitted,
-  handleIsSubmited})=> {
+  listOfConstellationsName})=> {
 
     const [isOpen, setIsOpen] = useState(false);
     const togglePopup = () => {
         setIsOpen(!isOpen);
-        handleIsSubmited();
     };
 
 
@@ -24,12 +20,6 @@ const PopupCard = styled((
             <button className="show-form" onClick={togglePopup}>{buttonName}</button>
             {isOpen && (
               <div className="popup-card">
-                {isSubmitted ? (
-                  <div>
-                    <h3>Form submitted successfully!</h3>
-                    <button onClick={togglePopup}>Reset</button>
-                  </div>
-                ) : (
                 <div className="popup-content">
                   <button className="exit" onClick={togglePopup}>X</button>
                   <form onSubmit={handleFormSubmit}>
@@ -59,7 +49,7 @@ const PopupCard = styled((
                       }
                     <button type="submit">Submit</button>
                   </form>
-                </div>)}
+                </div>
               </div>
             )}
         </div>

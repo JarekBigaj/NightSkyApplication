@@ -6,8 +6,9 @@ const API_GET_STAR_DATA = `http://127.0.0.1:3600/api/stars/getDataSelectedStar`
 const API_GET_CONSTELLATION_DATA = `http://127.0.0.1:3600/api/constellations/getDataSelectedConstellation`
 
 const StarInfoCard = styled(({className}) => {
-    const [currentStarData,setCurrentStarData] = useState([]);
+    const [currentStarData,setCurrentStarData] = useState({});
     const [constellationData,setConstellationData] = useState([]);
+
 
     const querryString = window.location.search;
     const urlParams = new URLSearchParams(querryString);
@@ -31,19 +32,30 @@ const StarInfoCard = styled(({className}) => {
         (async () =>{
             try{
                 const response = await getStarData();
-                setCurrentStarData(response);
+                setCurrentStarData(()=>{
+                    return {
+                        Name: response.name,
+                        Description: response.description,
+                        "Url image": response.urlImage,
+                        constellationId: response.constellationId
+                    }
+                });
             } catch (error) {
                 console.log(error);
             }
         })()
     },[])
-
+    console.log(currentStarData['Url image'])
     useEffect(() => {
         (async () =>{
             try{
                 const constellationId = currentStarData.constellationId;
                 const response = await getConstellationData(constellationId);
-                setConstellationData(response);
+                setConstellationData(() => {
+                    return {
+                        Constellation:response.name,
+                    }
+                });
             } catch (error) {
                 console.log(error);
             }
@@ -52,7 +64,9 @@ const StarInfoCard = styled(({className}) => {
 
 
     return (
-        <CustomInfoCard starProps={currentStarData} constellationProps={constellationData}/>
+        <CustomInfoCard
+        starProps={currentStarData}
+        constellationProps={constellationData}/>
     )
 })`
 

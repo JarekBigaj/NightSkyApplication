@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import PopupCard from '../../helperComponents/PopupCard';
 import { API_GET_CONSTELLATION_LIST } from '../../server';
+import { listOfConstellation } from '../../helperFunctions/listOfConstellation';
 
 const AddStar = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -24,14 +25,7 @@ const AddStar = () => {
         body: JSON.stringify(formData)
     })
     .then(response => response.json())
-
-    // setFormData(prevData => {return {
-    //   ...prevData,
-    //     name: '',
-    //     description: '',
-    //     urlImage: '',
-    //     constellationId:''
-    // }})
+    
   };
 
   const handleInputChange = e => {
