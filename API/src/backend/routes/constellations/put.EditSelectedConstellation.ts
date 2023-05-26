@@ -4,7 +4,7 @@ import { prisma } from '../../database'
 import { checkPrismaError } from '../../utils/prisma.utils'
 import { ValidateAddConstellation } from '../../utils/validation.utils'
 
-export const EditSelectedConstellations: RequestHandler = async (req,res) => {
+export const EditSelectedConstellation: RequestHandler = async (req,res) => {
 
     const { id, name, description, urlImage, isActive, isDead } = req.body
     const validatedData = ValidateAddConstellation(req.body)
