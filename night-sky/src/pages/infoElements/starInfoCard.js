@@ -32,12 +32,15 @@ const StarInfoCard = styled(({className}) => {
         (async () =>{
             try{
                 const response = await getStarData();
+                console.log(response);
                 setCurrentStarData(()=>{
                     return {
+                        id: response.id,
                         Name: response.name,
                         Description: response.description,
                         "Url image": response.urlImage,
-                        constellationId: response.constellationId
+                        constellationId: response.constellationId,
+                        isDead:response.isDead
                     }
                 });
             } catch (error) {
@@ -45,7 +48,6 @@ const StarInfoCard = styled(({className}) => {
             }
         })()
     },[])
-    console.log(currentStarData['Url image'])
     useEffect(() => {
         (async () =>{
             try{

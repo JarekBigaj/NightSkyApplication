@@ -2,11 +2,7 @@ import { useState,useMemo, useEffect } from "react";
 import Pagination from "../../helperFunctions/Pagination";
 import { ThemeProvider } from "styled-components";
 import Table from "../../helperComponents/TableOfElements";
-<<<<<<< HEAD
 import {API_GET_CONSTELLATION_LIST,API_GET_STARS_LIST } from "../../server";
-=======
-import {API_GET_CONSTELLATION_LIST } from "../../server";
->>>>>>> front_v2
 
 const PageSize = 10;
 
@@ -46,11 +42,7 @@ function ListOfStars(){
             return {
                 id: value.id,
                 name: value.name,
-<<<<<<< HEAD
                 constellation: value.constellationId,
-=======
-                constellation: value.constellationId
->>>>>>> front_v2
             }
         })
     }

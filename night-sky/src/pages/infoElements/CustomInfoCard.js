@@ -1,30 +1,49 @@
 import { useEffect, useState } from "react";
 import { listOfConstellation } from "../../helperFunctions/listOfConstellation";
+import { useNavigate } from "react-router-dom";
+import { deleteElement } from "./deleteElement";
 
 
 
 const CustomInfoCard = ({starProps,constellationProps}) =>{
     const [isEdit,setIsEdit] = useState(false);
+    const navigate = useNavigate();
     const handleChangeIsEdit = () => setIsEdit(!isEdit);
-    
+    const handleDataDelete = () =>{
+         deleteElement(starProps);
+         navigate(`/message?options=delete`)
+    };
+    const selectedProps = {
+        id: starProps.id,
+        Name: starProps.Name,
+        Description: starProps.Description,
+        "Url image": starProps["Url image"],
+        constellationId: starProps.constellationId
+    }
+    console.log({selectedProps})
     return (
         <div>
             {!isEdit?(
                 <div>
-                    <CustomInfoField isEdit={isEdit} props={starProps} conditions={["id","constellationId"]}/>
+                    <CustomInfoField isEdit={isEdit} props={selectedProps} conditions={["id","constellationId"]}/>
                     <CustomInfoField props={constellationProps} conditions={["id"]}/>
                 </div>
             ) : (
                 <div>
-                    <EditForm props={starProps}/>
+                    <EditForm props={selectedProps} handleChangeIsEdit={handleChangeIsEdit}/>
                 </div>
             )}
-            
-        <button onClick={handleChangeIsEdit}>Edit</button>
-        <button>delete</button>
+        {!isEdit&&
+        <div>
+            <button onClick={handleChangeIsEdit}>Edit</button>
+            <button onClick={handleDataDelete}>delete</button>
+        </div>
+        }
+        
         </div>
     )
 }
+
 
 const CustomInfoField = ({props,conditions}) =>{
     const [id,constellationId] = conditions;
@@ -49,6 +68,7 @@ const CustomInfoField = ({props,conditions}) =>{
 
 const EditForm = ({props}) =>{
     const [constellationsName,setConstellationsName] = useState([]);
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         id: props.id,
         name: props.Name,
@@ -56,31 +76,44 @@ const EditForm = ({props}) =>{
         urlImage: props[`Url image`],
         constellationId:props.constellationId
     });
-    console.log(props);
-    const handleFormSubmit = e => {
-        e.preventDefault();
-        console.log(formData)
-        fetch('http://127.0.0.1:3600/api/stars/addStar',{
-            method:'POST',
+
+    const editStarData = async (formData) =>{
+        const response = await fetch('http://127.0.0.1:3600/api/stars/EditSelectedStar',{
+            method:'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(formData)
         })
-        .then(response => response.json())
-        
+        if(!response.ok) {
+            throw new Error(`This is an HTTP error: The status is ${response.status}`)
+        };
+        const json = response.json();
+        return json;
+    }
+    const handleFormSubmit = e => {
+        e.preventDefault();
+        (async () =>{
+            try{
+                const response = await editStarData(formData);
+            } catch (error) {
+                console.log(error);
+            }
+        })()
+        navigate(`/message?id=${formData.id}`);
       };
   
-      const handleInputChange = e => {
-        const { name, value } = e.target;
-        console.log(value);
-        setFormData(prevData => ({
-          ...prevData,
-          [name]: value,
-        }));
-  
-        console.log(value);
-      };
+    const handleInputChange = e => {
+      const { name, value } = e.target;
+      console.log(value);
+      setFormData(prevData => ({
+        ...prevData,
+        [name]: value,
+      }));  
+      console.log(value);
+    };
+
+
   
     useEffect(()=>{
         (async()=>{
@@ -93,30 +126,39 @@ const EditForm = ({props}) =>{
             }
         })()
     },[])
-  console.log({constellationsName})
 
     return (
         <div>
             <form onSubmit={handleFormSubmit}>
                 {
                     Object.entries(formData).map(([key,value])=>{
-                        return (
-                            key!=="id" ? (
+                        return (key!=="id" ? 
+                        (
                             <div key={key+"div"}>
                                 <label key={key+"label"}>{key + " :"}</label>
                                 {key === "constellationId" ?
-                                  <select defaultValue={value} name={key} onChange={handleInputChange}>
+                                  <select 
+                                  key={key+"select"} 
+                                  value={value} 
+                                  name={key} 
+                                  onChange={handleInputChange}>
                                     {constellationsName.map((constellation)=>{
                                       const {id,name} = constellation;
                                       return (
-                                        <option selected={name==="Orion"?"selected":""} key={id} value={id}  >
+                                        <option key={id+name} value={id}  >
                                           {name}
                                         </option>
                                       )
                                     })}
                                   </select>
                                 :
-                                  <input key={key} type="text" name={key} placeholder={value} value={value} onChange={handleInputChange} />
+                                  <input 
+                                  key={key+"input"} 
+                                  type="text" 
+                                  name={key} 
+                                  placeholder={value} 
+                                  value={value} 
+                                  onChange={handleInputChange} />
                                 }
                             </div>
                             ) : (
@@ -130,5 +172,7 @@ const EditForm = ({props}) =>{
         </div>
     )
 }
+
+
 
 export default CustomInfoCard;
