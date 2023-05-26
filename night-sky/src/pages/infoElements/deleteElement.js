@@ -1,19 +1,21 @@
 
 
-export const deleteElement = (props) => {
+export const deleteElement = (props,api) => {
+    const apiFromUrl = api;
     const elementData = {
         id: props.id,
         name: props.Name,
         description: props.Description,
         urlImage: props[`Url image`],
-        constellationId:props?.constellationId,
+        constellationId:props.constellationId,
         isDead:true
     };
-
+    console.log({apiFromUrl});
+    if(!elementData.constellationId) console.log("nothing")
     console.log({elementData})
 
-    const deleteData = async (data,api) =>{
-        const response = await fetch(api,{
+    const deleteData = async (data,apiFromUrl) =>{
+        const response = await fetch(apiFromUrl,{
             method:'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,7 +32,7 @@ export const deleteElement = (props) => {
 
     (async()=>{
         try{
-            const response = await deleteData(elementData);
+            const response = await deleteData(elementData,apiFromUrl);
         }catch(error) {
             console.log(error)
         }

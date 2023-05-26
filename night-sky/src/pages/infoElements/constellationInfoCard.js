@@ -11,7 +11,7 @@ const ConstellationInfoCard = () => {
     const navigate = useNavigate();
     const handleChangeIsEdit = () => setIsEdit(!isEdit);
     const handleDataDelete = () =>{
-         deleteElement(constellationData,'http://127.0.0.1:3600/api/stars/EditSelectedStar');
+         deleteElement(constellationData,'http://127.0.0.1:3600/api/constellations/EditSelectedContellation');
          navigate(`/message?options=delete`)
     };
 
@@ -66,8 +66,44 @@ const EditFormConstellation = ({props}) =>{
         name: props.Name,
         description: props.Description,
         urlImage: props[`Url image`],
-        constellationId:props.constellationId
     });
+
+    const editData = async (formData) =>{
+        const response = await fetch('http://127.0.0.1:3600/api/constellations/EditSelectedContellation',{
+            method:'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        })
+        if(!response.ok) {
+            throw new Error(`This is an HTTP error: The status is ${response.status}`)
+        };
+        const json = response.json();
+        return json;
+    }
+    const handleFormSubmit = e => {
+        e.preventDefault();
+        (async () =>{
+            try{
+                const response = await editData(formData);
+            } catch (error) {
+                console.log(error);
+            }
+        })()
+        navigate(`/message?id=${formData.id}&options=constellation`);
+      };
+  
+    const handleInputChange = e => {
+      const { name, value } = e.target;
+      console.log(value);
+      setFormData(prevData => ({
+        ...prevData,
+        [name]: value,
+      }));  
+      console.log(value);
+    };
+
     return (
         <div>
                 <form onSubmit={handleFormSubmit}>

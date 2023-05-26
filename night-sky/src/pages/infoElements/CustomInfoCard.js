@@ -118,7 +118,6 @@ const EditForm = ({props}) =>{
         (async()=>{
             try{
                 const response = await listOfConstellation();
-                console.log({response})
                 setConstellationsName(response);
             }catch(error) {
                 console.log(error)

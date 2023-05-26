@@ -5,12 +5,14 @@ export const MessageAfterSubmit = () =>{
 
     const querryString = window.location.search;
     const urlParams = new URLSearchParams(querryString);
-    const getStarId = urlParams.get('id');
+    const getId = urlParams.get('id');
     const getOptions = urlParams.get('options');
 
     const redirect = () => {
+        if(getOptions==="addStar") return navigate(`/`)
+        if(getOptions==="constellation") return navigate(`/constellationInfoCard?id=${getId}`)
         if(getOptions==="delete") return navigate(`/listOfStars`);
-        return navigate(`/starInfoCard?id=${getStarId}`);
+        return navigate(`/starInfoCard?id=${getId}`);
     }
     return (
         <div>

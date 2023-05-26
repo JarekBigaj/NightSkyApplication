@@ -10,6 +10,7 @@ const getConstellations = async () =>{
 
 const selectedConstellationsName = (response) =>{
     return response.map(value =>{
+        if(response.isDead) return;
         return{
             id: value.id,
             name: value.name

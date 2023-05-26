@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import PopupCard from '../../helperComponents/PopupCard';
 import { API_GET_CONSTELLATION_LIST } from '../../server';
 import { listOfConstellation } from '../../helperFunctions/listOfConstellation';
+import { useNavigate } from 'react-router-dom';
 
 const AddStar = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -12,6 +13,7 @@ const AddStar = () => {
     urlImage: '',
     constellationId:''
   });
+  const navigate = useNavigate();
 
 
   const handleFormSubmit = e => {
@@ -25,7 +27,7 @@ const AddStar = () => {
         body: JSON.stringify(formData)
     })
     .then(response => response.json())
-    
+    navigate(`/message?options=addStar`);
   };
 
   const handleInputChange = e => {
