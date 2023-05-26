@@ -6,14 +6,14 @@ export const deleteElement = (props) => {
         name: props.Name,
         description: props.Description,
         urlImage: props[`Url image`],
-        constellationId:props.constellationId,
+        constellationId:props?.constellationId,
         isDead:true
     };
 
-    console.log(elementData)
+    console.log({elementData})
 
-    const deleteData = async (data) =>{
-        const response = await fetch('http://127.0.0.1:3600/api/stars/EditSelectedStar',{
+    const deleteData = async (data,api) =>{
+        const response = await fetch(api,{
             method:'PUT',
             headers: {
                 'Content-Type': 'application/json',

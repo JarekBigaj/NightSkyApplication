@@ -10,7 +10,7 @@ const CustomInfoCard = ({starProps,constellationProps}) =>{
     const navigate = useNavigate();
     const handleChangeIsEdit = () => setIsEdit(!isEdit);
     const handleDataDelete = () =>{
-         deleteElement(starProps);
+         deleteElement(starProps,'http://127.0.0.1:3600/api/stars/EditSelectedStar');
          navigate(`/message?options=delete`)
     };
     const selectedProps = {
@@ -20,7 +20,6 @@ const CustomInfoCard = ({starProps,constellationProps}) =>{
         "Url image": starProps["Url image"],
         constellationId: starProps.constellationId
     }
-    console.log({selectedProps})
     return (
         <div>
             {!isEdit?(
@@ -30,7 +29,7 @@ const CustomInfoCard = ({starProps,constellationProps}) =>{
                 </div>
             ) : (
                 <div>
-                    <EditForm props={selectedProps} handleChangeIsEdit={handleChangeIsEdit}/>
+                    <EditForm props={selectedProps}/>
                 </div>
             )}
         {!isEdit&&
@@ -45,7 +44,7 @@ const CustomInfoCard = ({starProps,constellationProps}) =>{
 }
 
 
-const CustomInfoField = ({props,conditions}) =>{
+export const CustomInfoField = ({props,conditions}) =>{
     const [id,constellationId] = conditions;
     
     return (
