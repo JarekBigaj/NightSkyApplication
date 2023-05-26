@@ -7,7 +7,7 @@ import { getAllDataConstellations } from './constellations/get.AllDataConstellat
 import { getDataSelectedStar } from './stars/get.dataSelectedStar'
 import { getDataSelectedConstellation } from './constellations/get.dataSelectedConstellation'
 import { EditSelectedStar} from './stars/put.EditSelectedStar'
-import { EditSelectedConstellations} from './constellations/put.EditSelectedConstellations'
+import { EditSelectedConstellation} from './constellations/put.EditSelectedConstellation'
 import { DeleteSelectedStar } from './stars/delete.deleteSelectedStar'
 import { DeleteSelectedConstellation } from './constellations/delete.DataSelectedConstellation'
 
@@ -36,6 +36,8 @@ router.get('/api/stars/getAllDataStars', getAllDataStars)
 router.get('/api/constellations/getAllDataConstellations', getAllDataConstellations)
 
 router.put('/api/stars/EditSelectedStar', EditSelectedStar )
+
+router.put('/api/constellations/EditSelectedContellation', EditSelectedConstellation )
 
 router.delete('/api/stars/DeleteSelectedStar', DeleteSelectedStar )
 
