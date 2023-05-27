@@ -56,6 +56,7 @@ const Table = styled(({className,props,passedNameProperties,to,title}) => {
   caption,
   th {
     text-align: left;
+    pointer-events:none;
   }
 
   caption {
@@ -100,6 +101,13 @@ const Table = styled(({className,props,passedNameProperties,to,title}) => {
       
     }
 
+
+  }
+  tr{
+    cursor:pointer;
+  }
+  tr:hover{
+    background:hsl(0 0% 0% /0.8);
   }
   
   

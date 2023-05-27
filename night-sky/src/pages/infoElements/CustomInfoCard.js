@@ -3,6 +3,7 @@ import { listOfConstellation } from "../../helperFunctions/listOfConstellation";
 import { useNavigate } from "react-router-dom";
 import { deleteElement } from "./deleteElement";
 import styled from "styled-components";
+import './CustomInfoCard.css';
 
 
 
@@ -22,7 +23,7 @@ const CustomInfoCard = ({starProps,constellationProps}) =>{
         constellationId: starProps.constellationId
     }
     return (
-        <div>
+        <div className="general-wrapper">
             {!isEdit?(
                 <div >
                     <CustomInfoField isEdit={isEdit} props={selectedProps} conditions={["id","constellationId"]}/>
@@ -34,9 +35,9 @@ const CustomInfoCard = ({starProps,constellationProps}) =>{
                 </div>
             )}
         {!isEdit&&
-        <div >
-            <button  onClick={handleChangeIsEdit}>Edit</button>
-            <button  onClick={handleDataDelete}>Delete</button>
+        <div className="action-button-wrapper">
+            <button className="action-button"  onClick={handleChangeIsEdit}>Edit</button>
+            <button className="action-button" onClick={handleDataDelete}>Delete</button>
         </div>
         }
         
@@ -49,14 +50,14 @@ export const CustomInfoField = styled(({props,conditions}) =>{
     const [id,constellationId] = conditions;
     
     return (
-        <div>
+        <div className="info-wrapper">
             {
                 Object.entries(props).map(([key,value])=>{
                     if(key === id || key===constellationId) return 
                     return (
-                        <div key={`${key}:${value}`}>
-                            <label key={key}>{key} : </label>
-                            <label key={value}>{value}</label>
+                        <div className={`info-row ${key}`} key={`${key}:${value}`}>
+                            {key !== "Name"?<label className="info-cell" key={key}>{key} : </label> : <></>}
+                            <label className="info-cell" key={value}>{value}</label>
                         </div>
                     )
                 })
