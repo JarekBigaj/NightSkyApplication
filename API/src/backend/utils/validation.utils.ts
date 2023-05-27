@@ -8,17 +8,20 @@ export const ValidateAddStar = (star: any) => {
         .required(),
 
         name: Joi.string()
+        .regex(/^[A-Za-z\s]+$/)
         .min(2)
         .max(60)
         .lowercase()
         .required(),
 
         description: Joi.string()
+        .regex(/^[a-zA-Z0-9.,!?()-\s]+$/)
         .min(10)
         .max(255)
         .required(),
 
         urlImage: Joi.string()
+        .regex(/^[a-zA-Z0-9./:]+$/)
         .min(10)
         .max(255)
         .required(),
@@ -43,17 +46,20 @@ export const ValidateAddConstellation = (constellation: any) => {
         .required(),
 
         name: Joi.string()
+        .regex(/^[A-Za-z\s]+$/)
         .min(2)
         .max(60)
         .lowercase()
         .required(),
 
         description: Joi.string()
+        .regex(/^[a-zA-Z0-9.,!?()-\s]+$/)
         .min(10)
         .max(255)
         .required(),
 
         urlImage: Joi.string()
+        .regex(/^[a-zA-Z0-9./:]+$/)
         .min(10)
         .max(255)
         .required(),
