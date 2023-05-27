@@ -142,12 +142,13 @@ const NightSkyWeather = styled(({className}) => {
         )
 })`
     margin:0;
+    background:hsla(0, 0%, 7%, 1) ;
     padding:0;
+    color: white;
     box-sizing:border-box;
 
     .sidebar{
         padding:.4rem 3rem;
-        background-color:white;
         width:250px;
         position: absolute;
         top:4.5rem;
@@ -158,12 +159,11 @@ const NightSkyWeather = styled(({className}) => {
 
     div.active {
         width: 40%;
-        background-color:black;
+        background: linear-gradient(to bottom right ,#333,hsla(0, 0%, 7%, 1));
     }
 
     #btn{
         position: absolute;
-        color: green;
         top: .4rem;
         left: .4rem;
         font-size: 2rem;
@@ -172,7 +172,6 @@ const NightSkyWeather = styled(({className}) => {
     }
 
     .top .logo {
-        color: green;
         display: flex;
         height: 50px;
         align-items:center;

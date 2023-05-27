@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { listOfConstellation } from "../../helperFunctions/listOfConstellation";
 import { useNavigate } from "react-router-dom";
 import { deleteElement } from "./deleteElement";
+import styled from "styled-components";
 
 
 
@@ -23,7 +24,7 @@ const CustomInfoCard = ({starProps,constellationProps}) =>{
     return (
         <div>
             {!isEdit?(
-                <div>
+                <div >
                     <CustomInfoField isEdit={isEdit} props={selectedProps} conditions={["id","constellationId"]}/>
                     <CustomInfoField props={constellationProps} conditions={["id"]}/>
                 </div>
@@ -33,9 +34,9 @@ const CustomInfoCard = ({starProps,constellationProps}) =>{
                 </div>
             )}
         {!isEdit&&
-        <div>
-            <button onClick={handleChangeIsEdit}>Edit</button>
-            <button onClick={handleDataDelete}>delete</button>
+        <div >
+            <button  onClick={handleChangeIsEdit}>Edit</button>
+            <button  onClick={handleDataDelete}>Delete</button>
         </div>
         }
         
@@ -44,7 +45,7 @@ const CustomInfoCard = ({starProps,constellationProps}) =>{
 }
 
 
-export const CustomInfoField = ({props,conditions}) =>{
+export const CustomInfoField = styled(({props,conditions}) =>{
     const [id,constellationId] = conditions;
     
     return (
@@ -63,7 +64,9 @@ export const CustomInfoField = ({props,conditions}) =>{
             }
         </div>
     )
-}
+})`
+
+`
 
 const EditForm = ({props}) =>{
     const [constellationsName,setConstellationsName] = useState([]);

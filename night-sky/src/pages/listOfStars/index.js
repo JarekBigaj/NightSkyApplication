@@ -41,8 +41,8 @@ function ListOfStars(){
         return response.map(value => {
             return {
                 id: value.id,
-                name: value.name,
-                constellation: value.constellationId,
+                Name: value.name,
+                Constellation: value.constellationId,
             }
         })
     }
@@ -79,7 +79,7 @@ function ListOfStars(){
 
     const correctedStarsData = starsData.map(value => {
         constellationsName.forEach(element => {
-            if(element.id === value.constellation) value.constellation = element.name;
+            if(element.id === value.Constellation) value.Constellation = element.name;
         });
         return value;
     })
@@ -98,6 +98,7 @@ function ListOfStars(){
                     props={currentTableData} 
                     passedNameProperties={starsProperties}
                     to={"/starInfoCard"}
+                    title={"stars"}
                 />
             </ThemeProvider>
             <Pagination

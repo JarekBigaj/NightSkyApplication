@@ -2,35 +2,39 @@ import { useNavigate} from "react-router-dom";
 import styled from "styled-components";
 
 
-const Table = styled(({className,props,passedNameProperties,to}) => {
+const Table = styled(({className,props,passedNameProperties,to,title}) => {
     const navigate = useNavigate();
     const elements = props;
     const nameOfProps = passedNameProperties;
     return (
         <TableWrapper>
             <table className={className}>
+              <caption>
+                Table of {title}
+              </caption>
                 <thead>
-                    <TableRow>
+                    <tr>
                         {nameOfProps.map((propsName)=>(
                             <th key={propsName}>{propsName}</th>
                         ))}
-                    </TableRow>
+                    </tr>
                 </thead>
                 <tbody>
                     {
-                        elements.map((element) => (
-                            <TableRow key={element.id} onClick={()=>{
+                        elements.map((element) =>
+                         (
+                            <tr key={element.id} onClick={()=>{
                               navigate(`${to}?id=${element.id}`)
                             }}>
                               {
-                                Object.values(element).map((value)=>{
+                                Object.entries(element).map(([key,value])=>{
                                   if(value !== element.id){
-                                    return <TableCell key={value+"cell"}>{value}</TableCell>
+                                    return <td data-cell={key} key={value+"cell"}>{value}</td>
                                   }
                                   return null;
                                 })
                               }
-                            </TableRow>
+                            </tr>
                         ))
                     }
                 </tbody>
@@ -38,65 +42,76 @@ const Table = styled(({className,props,passedNameProperties,to}) => {
         </TableWrapper>
         )
 })`
-  border-collapse: collapse;
-  width: 50%;
-  max-width: 100%;
-  margin-bottom: 1rem;
-  background-color: ${props => props.theme.colors.white};
-  color: ${props => props.theme.colors.dark};
-  border-radius: 0.25rem;
-  overflow: hidden;
-  
+  width:100%;
+  border-collapse:collapse;
+  background-color:#323232;
+  margin-top:1.5rem;
+
+  caption,
   th,
   td {
-    padding: 0.75rem;
-    vertical-align: middle;
-    border-top: 1px solid ${props => props.theme.colors.greyLighter};
+    padding: 1rem;
   }
 
-  thead {
-    background-color: ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.white};
+  caption,
+  th {
+    text-align: left;
+  }
+
+  caption {
+    background: hsl(0 0% 0%);
+    font-size: 1,5rem;
+    font-weight: 700;
+    text-transform: uppercase;
   }
 
   th {
-    font-weight: 700;
-    text-align: left;
-    vertical-align: bottom;
-    border-bottom: 2px solid ${props => props.theme.colors.greyLighter};
+    background: hsl(0 0% 0% / 0.5);
   }
 
-  tbody tr:nth-of-type(odd) {
-    background-color: ${props => props.theme.colors.greyLighter};
+  tr:nth-of-type(2n){
+    background: hsl(0 0% 0% /0.1);
+
   }
 
-  tbody td {
-    vertical-align: middle;
-    border-bottom: 1px solid ${props => props.theme.colors.greyLighter};
-  }
+  @media (max-width: 650px) {
+    th{
+      display:none;
+    }
+    td{
+      display:grid;
+      grid-template-columns: 15ch auto;
+      gap:0.5rem;
+      padding: 0.5rem 1rem;
+    }
 
-  td{
-    cursor:pointer;
+    td:first-child{
+      padding-top:1rem;
+    }
+
+    td:last-child{
+      padding-bottom:1rem;
+    }
+
+    td::before{
+      content: attr(data-cell) ": ";
+      font-weight:700;
+      text-transforme: capitalize;
+      
+    }
+
   }
+  
+  
 `;
 
 
 const TableWrapper = styled.div`
-  overflow-x: auto;
+  width: min(900px, 100% - 3rem);
+  margin-inline: auto;
+  color:white;
+  
 `;
 
-
-const TableRow = styled.tr`
-  &:hover {
-    background-color: ${props => props.theme.colors.grey};
-  }
-`;
-
-const TableCell = styled.td`
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-`;
 
 export default Table;

@@ -17,7 +17,7 @@ const PopupCard = styled((
 
     return (
         <div className={className}>
-            <button className="show-form" onClick={togglePopup}>{buttonName}</button>
+            <button className="button-neon-styled" onClick={togglePopup}>{buttonName}</button>
             {isOpen && (
               <div className="popup-card">
                 <div className="popup-content">
@@ -33,7 +33,7 @@ const PopupCard = styled((
                                           {listOfConstellationsName.map((constellation)=>{
                                             const {id,name} = constellation;
                                             return (
-                                              <option selected={name==="Orion"?"selected":""} key={id} value={id}  >
+                                              <option selected={name==="PolonExtra"?"selected":""} key={id} value={id}  >
                                                 {name}
                                               </option>
                                               
@@ -55,6 +55,8 @@ const PopupCard = styled((
         </div>
     )
 })`
+
+
 position: relative;
   
 .popup-card {
@@ -75,6 +77,8 @@ position: relative;
   padding: 20px;
   border: 1px solid #ccc;
 }
+
+
 
 `;
 

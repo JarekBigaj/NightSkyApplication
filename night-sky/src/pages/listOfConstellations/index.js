@@ -34,7 +34,7 @@ export default function ListOfConstellations (){
         return response.map(value => {
             return {
                 id: value.id,
-                name: value.name,
+                Name: value.name,
             }
         })
     }
@@ -66,6 +66,7 @@ export default function ListOfConstellations (){
                 props={currentTableData} 
                 passedNameProperties={ConstellationsProperties}
                 to={"/constellationInfoCard"}
+                title={"constellations"}
             />
         </ThemeProvider>
         <Pagination
