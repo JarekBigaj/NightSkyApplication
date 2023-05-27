@@ -14,9 +14,8 @@ body {
 }
 
 
+
 code {
-  
-  
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
@@ -60,6 +59,7 @@ code {
   content: "";
   position:absolute;
   background: var(--clr-neon);
+  
   top:120%;
   left:0;
   width:100%;
@@ -89,7 +89,7 @@ code {
 .button-neon-styled:hover,
 .button-neon-styled:focus{
   background: var(--clr-neon);
-  color: var(--clr-bg);
+  color: white;
   text-shadow: none;
 }
 
