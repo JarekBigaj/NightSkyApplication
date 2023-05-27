@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import PopupCard from '../../helperComponents/PopupCard';
 import { API_GET_CONSTELLATION_LIST } from '../../server';
-import { listOfConstellation } from '../../helperFunctions/listOfConstellation';
 import { useNavigate } from 'react-router-dom';
 
 const AddStar = () => {
@@ -64,6 +63,7 @@ const AddStar = () => {
         try{
             const response = await getConstellations();
             setConstellationsName(selectedConstellationsName(response));
+            setFormData((prevData) => { return {...prevData,constellationId:response[0].id}})
         } catch (error) {
             console.log(error);
         }

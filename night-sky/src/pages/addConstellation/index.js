@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import PopupCard from '../../helperComponents/PopupCard';
+import { useNavigate } from 'react-router-dom';
 
 const AddConstellation = () => {
-  
   const [formData, setFormData] = useState({
     name: '',
     description: '',
     urlImage: ''
   });
+  const navigate = useNavigate();
 
   const handleFormSubmit = e => {
     e.preventDefault();
@@ -20,6 +21,7 @@ const AddConstellation = () => {
         body: JSON.stringify(formData)
     })
     .then(response => response.json())
+    navigate(`/message?options=addConstellation`);
   };
 
   const handleInputChange = e => {

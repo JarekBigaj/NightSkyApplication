@@ -6,7 +6,7 @@ import { API_GET_CONSTELLATION_LIST } from "../../server";
 
 // const API_GET_CONSTELLATIONS_LIST = "http://127.0.0.1:3600/api/constellations/getAllDataConstellations"
 
-const PageSize = 3;
+const PageSize = 10;
 
 const theme = {
     colors: {

@@ -14,6 +14,12 @@ const PopupCard = styled((
         setIsOpen(!isOpen);
     };
 
+    const nameForFormElement = {
+      name: 'Name',
+      description: 'Description',
+      urlImage: 'Url Image',
+      constellationId:'Constellation'
+    }
 
     return (
         <div className={className}>
@@ -27,13 +33,13 @@ const PopupCard = styled((
                           Object.entries(formData).map(([key,value])=>{
                               return (
                                   <div key={key+"div"} className="row-wrapper">
-                                      <label key={key+"label"}>{key + " :"}</label>
+                                      <label key={key+"label"}>{nameForFormElement[key] + " :"}</label>
                                       {key === "constellationId" ?
                                         <select value={value} name={key} onChange={handleInputChange}>
                                           {listOfConstellationsName.map((constellation)=>{
                                             const {id,name} = constellation;
                                             return (
-                                              <option selected={name==="PolonExtra"?"selected":""} key={id} value={id}  >
+                                              <option key={id} value={id}  >
                                                 {name}
                                               </option>
                                               
@@ -83,7 +89,7 @@ position: relative;
   width: min(350px, 100% - 3rem);
   margin-inline: auto;
   color:white;
-  font-size:1.2em;
+  font-size:1.3em;
   position:relative;
   background-color: black;
   height: min(300px, 100% - 3rem);
@@ -180,12 +186,15 @@ position: relative;
 }
 
 form {
-  
 }
 
 input{
-  background-color:inherit;
-  border:gray solid 2px;
+  font-size: 1em;
+  width:120%;
+  padding:0;
+  background-color:black;
+  border:var(--clr-neon) solid 0.1px;
+  color:white;
   border-radius:5px;
 }
 
@@ -251,6 +260,17 @@ input{
 .exit:focus::after{
   opacity:1;
 }
+
+select {
+  font-size: 0.8em;
+  width:120%;
+  padding:0;
+  background-color: black;
+  color: white;
+  border:var(--clr-neon) solid 2px;
+  border-radius:5px;
+}
+
 `;
 
 
