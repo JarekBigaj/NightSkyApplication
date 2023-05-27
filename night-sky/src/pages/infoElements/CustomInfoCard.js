@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { deleteElement } from "./deleteElement";
 import styled from "styled-components";
 import './CustomInfoCard.css';
+import './formCard.css';
 
 
 
@@ -53,7 +54,7 @@ export const CustomInfoField = styled(({props,conditions}) =>{
         <div className="info-wrapper">
             {
                 Object.entries(props).map(([key,value])=>{
-                    if(key === id || key===constellationId) return 
+                    if(key === id || key===constellationId) return <></>
                     return (
                         <div className={`info-row ${key}`} key={`${key}:${value}`}>
                             {key !== "Name"?<label className="info-cell" key={key}>{key} : </label> : <></>}
@@ -130,14 +131,15 @@ const EditForm = ({props}) =>{
     },[])
 
     return (
-        <div>
+        <div className="form-card">
+            <div key="form-content" className="form-content">
             <form onSubmit={handleFormSubmit}>
                 {
                     Object.entries(formData).map(([key,value])=>{
                         return (key!=="id" ? 
                         (
-                            <div key={key+"div"}>
-                                <label key={key+"label"}>{key + " :"}</label>
+                            <div className="row-wrapper" key={key+"div"}>
+                                <label key={key+"label"}>{key==="constellationId"?"Constellation": key + " :"}</label>
                                 {key === "constellationId" ?
                                   <select 
                                   key={key+"select"} 
@@ -169,8 +171,11 @@ const EditForm = ({props}) =>{
                         )
                     })
                 }
-              <button type="submit">Submit</button>
+                <div className="button-wrapper-small">
+                    <button className="button-neon-styled-small" type="submit">Submit</button>
+                </div>
             </form>
+            </div>
         </div>
     )
 }

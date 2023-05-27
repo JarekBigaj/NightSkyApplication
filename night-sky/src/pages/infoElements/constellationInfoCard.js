@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { CustomInfoField } from "./CustomInfoCard";
 import { useNavigate } from "react-router-dom";
 import { deleteElement } from "./deleteElement";
+import './CustomInfoCard.css';
+import './formCard.css';
 import { getDataConstellation } from "../../helperFunctions/getDataConstellation";
 
 const ConstellationInfoCard = () => {
@@ -35,22 +37,22 @@ const ConstellationInfoCard = () => {
                 console.log(error);
             }
         })()
-    },[])
+    },[constellationId])
     return (
-        <div>
+        <div className="general-wrapper">
             {!isEdit?(
-                <div>
-                    <CustomInfoField props={constellationData} conditions={["id"]}/>
+                <div key={CustomInfoField}>
+                    <CustomInfoField  props={constellationData} conditions={["id"]}/>
                 </div>
             ) : (
-                <div>
+                <div key={"EditFormConstellation"}>
                     <EditFormConstellation props={constellationData} handleChangeIsEdit={handleChangeIsEdit}/>
                 </div>
             )}
             {!isEdit&&
-                <div>
-                    <button onClick={handleChangeIsEdit}>Edit</button>
-                    <button onClick={handleDataDelete}>delete</button>
+                <div className="action-button-wrapper">
+                    <button className="action-button" onClick={handleChangeIsEdit}>Edit</button>
+                    <button className="action-button" onClick={handleDataDelete}>delete</button>
                 </div>
             }
         </div>
@@ -96,7 +98,6 @@ const EditFormConstellation = ({props}) =>{
   
     const handleInputChange = e => {
       const { name, value } = e.target;
-      console.log(value);
       setFormData(prevData => ({
         ...prevData,
         [name]: value,
@@ -105,13 +106,14 @@ const EditFormConstellation = ({props}) =>{
     };
 
     return (
-        <div>
+        <div className="form-card">
+            <div  className="form-content">
                 <form onSubmit={handleFormSubmit}>
                 {
                     Object.entries(formData).map(([key,value])=>{
                         return (key!=="id" ? 
                         (
-                            <div key={key+"div"}>
+                            <div className="row-wrapper" key={key+":"+value}>
                                 <label key={key+"label"}>{key + " :"}</label>
                                 <input 
                                 key={key+"input"} 
@@ -127,8 +129,11 @@ const EditFormConstellation = ({props}) =>{
                         )
                     })
                 }
-              <button type="submit">Submit</button>
+                <div className="button-wrapper-small">
+                    <button className="button-neon-styled-small" type="submit">Submit</button>
+                </div>
             </form>
+            </div>
         </div>
     )
 }

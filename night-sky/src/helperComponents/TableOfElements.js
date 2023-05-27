@@ -60,10 +60,21 @@ const Table = styled(({className,props,passedNameProperties,to,title}) => {
   }
 
   caption {
+    font-size: 1.5em;
+    font-weight: 700;
     background: hsl(0 0% 0%);
+    border: var(--clr-neon) solid 1px;
+    border-radius:15px 15px 0 0;
     font-size: 1,5rem;
     font-weight: 700;
     text-transform: uppercase;
+    text-shadow: 
+      0 0 0.125em hsl(0 0% 100% / 0.3),
+      0 0 0.45em currentColor;
+
+    box-shadow: 
+      inset 0 0 0.5em 0 var(--clr-neon),
+      0 0 0.5em 0 var(--clr-neon) ;
   }
 
   th {
