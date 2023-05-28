@@ -12,7 +12,6 @@ const AddConstellation = () => {
 
   const handleFormSubmit = e => {
     e.preventDefault();
-    console.log(formData)
     fetch('http://127.0.0.1:3600/api/stars/addConstellation',{
         method:'POST',
         headers: {
@@ -20,7 +19,11 @@ const AddConstellation = () => {
         },
         body: JSON.stringify(formData)
     })
-    .then(response => response.json())
+    .then(response => {
+      if(!response.ok) navigate(`/message?options=addStar&msg=Failed`);
+      return response.json()
+    })
+
     navigate(`/message?options=addConstellation`);
   };
 

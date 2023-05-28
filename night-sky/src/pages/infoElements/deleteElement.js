@@ -10,9 +10,6 @@ export const deleteElement = (props,api) => {
         constellationId:props.constellationId,
         isDead:true
     };
-    console.log({apiFromUrl});
-    if(!elementData.constellationId) console.log("nothing")
-    console.log({elementData})
 
     const deleteData = async (data,apiFromUrl) =>{
         const response = await fetch(apiFromUrl,{
@@ -26,7 +23,6 @@ export const deleteElement = (props,api) => {
             throw new Error(`This is an HTTP error: The status is ${response.status}`)
         };
         const json = response.json();
-        console.log(json);
         return json;
     }
 

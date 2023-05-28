@@ -59,7 +59,7 @@ const PopupCard = styled((
                           })
                       }
                     <div className="button-wrapper-small">
-                      <button class="button-neon-styled-small" type="submit">Submit</button>
+                      <button className="button-neon-styled-small" type="submit">Submit</button>
                     </div>
                   </form>
                 </div>

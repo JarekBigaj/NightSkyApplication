@@ -18,6 +18,7 @@ const AddStar = () => {
   const handleFormSubmit = e => {
     e.preventDefault();
     console.log(formData)
+
     fetch('http://127.0.0.1:3600/api/stars/addStar',{
         method:'POST',
         headers: {
@@ -25,7 +26,10 @@ const AddStar = () => {
         },
         body: JSON.stringify(formData)
     })
-    .then(response => response.json())
+    .then(response => {
+      if(!response.ok) navigate(`/message?options=addStar&msg=Failed`);
+      return response.json()
+    })
     navigate(`/message?options=addStar`);
   };
 

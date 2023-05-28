@@ -38,7 +38,6 @@ const Nav = styled.nav`
 
     .site-title{
         font-size: 3rem;
-
         text-shadow: 
         0 0 0.125em hsl(0 0% 100% / 0.3),
         0 0 0.45em currentColor;

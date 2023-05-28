@@ -153,12 +153,13 @@ const NightSkyWeather = styled(({className}) => {
         position: absolute;
         top:4.5rem;
         left:0;
-        height:350px;
+        height:400px;
         transition: all 0.5s ease;
+        z-index:999;
     }
 
     div.active {
-        width: 40%;
+        width: 30%;
         background: linear-gradient(to bottom right ,#333,hsla(0, 0%, 7%, 1));
     }
 
@@ -243,7 +244,7 @@ const Input = styled(({className,checked,type,value,onChange,name,disabled})=>{
     return <input className={className} checked={checked} name={name} type={type} value={value} onChange={onChange} disabled={disabled}/>
 })`
     cursor: pointer;
-
+    width:2em;
 `;
 
 const Slider = styled(({className,type,min,max,value,onChange})=>{
@@ -259,6 +260,7 @@ const Slider = styled(({className,type,min,max,value,onChange})=>{
 
   -webkit-appearance: none;
   appearance: none;
+  width:50%;
   height: 10px;
   margin-top: 0.5rem;
   background: linear-gradient(to right, var(--light-blue) 0%, var(--blue) 100%);

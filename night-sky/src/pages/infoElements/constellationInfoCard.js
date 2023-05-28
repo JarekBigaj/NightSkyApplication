@@ -14,7 +14,7 @@ const ConstellationInfoCard = () => {
     const handleChangeIsEdit = () => setIsEdit(!isEdit);
     const handleDataDelete = () =>{
          deleteElement(constellationData,'http://127.0.0.1:3600/api/constellations/EditSelectedContellation');
-         navigate(`/message?options=delete`)
+         navigate(`/message?options=deleteConst`)
     };
 
     const querryString = window.location.search;
@@ -91,6 +91,7 @@ const EditFormConstellation = ({props}) =>{
                 const response = await editData(formData);
             } catch (error) {
                 console.log(error);
+                navigate(`/message?id=${formData.id}&options=constellation&msg=Failed`);
             }
         })()
         navigate(`/message?id=${formData.id}&options=constellation`);

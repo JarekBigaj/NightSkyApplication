@@ -102,6 +102,7 @@ const EditForm = ({props}) =>{
                 const response = await editStarData(formData);
             } catch (error) {
                 console.log(error);
+                navigate(`/message?id=${formData.id}&msg=Failed`);
             }
         })()
         navigate(`/message?id=${formData.id}`);
